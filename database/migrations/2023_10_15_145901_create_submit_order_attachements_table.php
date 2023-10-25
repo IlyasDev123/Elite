@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('submit_order_attachements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('submit_order_id')->constrained('submit_orders')->onDelete('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->string('attachment');
             $table->timestamps();
         });

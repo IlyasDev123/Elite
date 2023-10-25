@@ -1,6 +1,7 @@
 <div class="form-group mt-3">
     <label for="input-3">What will you use it for *</label>
-    <select name="type" class="form-control @error('type') is-invalid @enderror" id="use1" required>
+    <select name="attributes[where_will_use]" class="form-control @error('type') is-invalid @enderror" id="use1"
+        required>
         <option value=""></option>
         <option value="Screen Printing">Screen Printing</option>
         <option value="Direct To Garment">Direct To Garment</option>
@@ -16,7 +17,8 @@
 </div>
 <div class="form-group mt-3">
     <label for="input-4">Color Scheme *</label>
-    <select name="placement" id="colorscheme" class="form-control @error('placement') is-invalid @enderror" required>
+    <select name="attributes[color_scheme]" id="colorscheme"
+        class="form-control @error('placement') is-invalid @enderror" required>
         <option value="">Color Scheme</option>
         <option value="Black and White">Black and White</option>
         <option value="Black and White with halftones">Black
@@ -33,8 +35,8 @@
 </div>
 <div class="form-group mt-3">
     <label for="input-5">Design Format *</label>
-    <select class="form-control @error('design_format') is-invalid @enderror" name="design_format" id="designformat"
-        required>
+    <select class="form-control @error('design_format') is-invalid @enderror" name="attributes[design_format]"
+        id="designformat" required>
         <option value="" selected="">Design Format</option>
         <option value=".ai">.ai</option>
         <option value=".cdr">.cdr</option>
@@ -48,12 +50,12 @@
 <div class="form-group  selection mt-3" id="otherdesignformat" style="display: none;">
     <label for="input-5">Enter Format *</label>
     <input type="text" placeholder="Enter other format" id="otherdesignformat" class="form-control other-format"
-        name="other_format">
+        name="attributes[other_format]">
 </div>
 <div class="form-group mt-3">
     <label for="input-5">Time Frame *</label>
-    <select class="form-control @error('time_frame') is-invalid @enderror" name="time_frame" id="time-frame-vector"
-        require>
+    <select class="form-control @error('time_frame') is-invalid @enderror" name="attributes[time_frame]"
+        id="time-frame-vector" require>
         <option value="" selected="">Time Frame</option>
         <option value="Normal Turnaround 3 - 24 Hours.">Normal
             Turnaround 3 - 24 Hours.

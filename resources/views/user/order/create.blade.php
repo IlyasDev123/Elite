@@ -12,7 +12,7 @@
                         @csrf
                         <div class="form-group mt-1">
                             <label for="input-1">Order Type</label>
-                            <select class="form-control" name="order_type" id="ordertype">
+                            <select class="form-control" name="product_category" id="ordertype">
                                 <option value="1" selected>Digitizing</option>
                                 <option value="2">Vector Conversion</option>
                             </select>
@@ -31,7 +31,7 @@
                                         </label>
                                         <input type="number" min="1"
                                             class="form-control @error('no_of_color') is-invalid @enderror"
-                                            name="no_of_color" id="colors" required />
+                                            name="attributes[no_of_color]" id="colors" required />
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                         <label for="cname">
                                             <b>Name of Colors *</b>
                                         </label>
-                                        <input type="text" placeholder="" id="cname" name="name_of_color"
+                                        <input type="text" placeholder="" id="cname" name="attributes[name_of_color]"
                                             class="form-control @error('name_of_color') is-invalid @enderror" required />
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                         </label>
                                         <input type="number" min="0.01" step="0.01"
                                             class="form-control  @error('height') is-invalid @enderror" id="height"
-                                            name="height" required />
+                                            name="attributes[height]" required />
                                     </div>
                                 </div>
                             </div>
@@ -70,8 +70,8 @@
                                             <b>Width *</b>
                                         </label>
                                         <input type="number" min="0.01" step="0.01" placeholder="" id="width"
-                                            class="form-control @error('width') is-invalid @enderror" name="width"
-                                            required />
+                                            class="form-control @error('width') is-invalid @enderror"
+                                            name="attributes[width]" required />
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                         <label for="cname">
                                             <b>Unit</b>
                                         </label>
-                                        <select name="unit" id="type"
+                                        <select name="attributes[unit]" id="type"
                                             class="form-control @error('unit') is-invalid @enderror">
                                             <option value="inches">Inches</option>
                                             <option value="mm">Mm</option>
@@ -108,7 +108,8 @@
                                 files, ZIP them up.</label>
                             <div class="mb-3 file__load">
                                 <label for="formFileMultiple" class="form-label">Multiple files</label>
-                                <input class="form-control" type="file" id="formFileMultiple" name="files[]" multiple>
+                                <input class="form-control" type="file" id="formFileMultiple" name="attachments[]"
+                                    multiple>
                             </div>
                         </div>
                         <div class="form-group m-2 mb-4 d-flex justify-content-end">

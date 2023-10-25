@@ -16,29 +16,30 @@
                             <thead class="text-uppercase text-bold">
                                 <tr>
                                     <th>#</th>
-                                    <th>Design Name</th>
-                                    <th>Order Type</th>
+                                    <th>Product Name</th>
+                                    <th>Product Category</th>
+                                    <th>Product Type</th>
                                     <th>Source Files</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->order_type }}</td>
-                                        <td>
+                                        <td>{{ $order->order_number }}</td>
+                                        <td>{{ $order->product->name }}</td>
+                                        <td>{{ $order->product->product_category }}</td>
+                                        <td>{{ $order->product->product_type }}</td>
 
-                                            @if (isset($order->submitOrder->attachments))
-                                                @foreach ($order->submitOrder->attachments as $item)
-                                                    <li>
-                                                        <a download="Source" href="{{ Storage::url($item->attachment) }}"
-                                                            title="{{ $item->attachment }}">Download</a>
-                                                    </li>
+                                        @if (isset($order->attachments))
+                                            @foreach ($order->attachments as $item)
+                                                <li>
+                                                    <a download="Source" href="{{ Storage::url($item->attachment) }}"
+                                                        title="{{ $item->attachment }}">Download</a>
+                                                </li>
 
-                                                    <br>
-                                                @endforeach
-                                            @endif
+                                                <br>
+                                            @endforeach
+                                        @endif
 
                                         </td>
                                     </tr>

@@ -13,21 +13,26 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th>#</th>
-                                    <th data-orderable="false">Order Type</th>
-                                    <th>Design Name</th>
+                                    <th>Prdouct Name</th>
+                                    <th data-orderable="false">Product Type</th>
+                                    <th data-orderable="false">Product Category</th>
+                                    <th data-orderable="false">Product Quantity</th>
                                     <th data-orderable="false">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $order->order_number }}</td>
 
                                         <td>
-                                            {{ $order->order_type }}
+                                            {{ $order->product->name }}
                                         </td>
                                         <td>
-                                            {{ $order->name }}
+                                            {{ $order->product->product_type }}
+                                        </td>
+                                        <td>
+                                            {{ $order->product->product_category }}
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.orders.show', $order->id) }}" title="View order"><i

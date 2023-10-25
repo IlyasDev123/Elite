@@ -5,8 +5,8 @@
                 <label for="colors">
                     <b>Type *</b>
                 </label>
-                <select name="type" class="form-control @error('type') is-invalid @enderror" id="fabrics-digital"
-                    required>
+                <select name="attributes[cloth_type]" class="form-control @error('type') is-invalid @enderror"
+                    id="fabrics-digital" required>
                     <option value="">Fabric / Garments</option>
                     <option value="Cotton">Cotton</option>
                     <option value="Polyester">Polyester</option>
@@ -29,7 +29,7 @@
                 <label for="cname">
                     <b>Placement *</b>
                 </label>
-                <select class="form-control @error('placement') is-invalid @enderror" name="placement"
+                <select class="form-control @error('placement') is-invalid @enderror" name="attributes[placement]"
                     id="placement-digital" data-other="#textbox_id1" data-other-text="Other" required>
                     <option>Design Placement</option>
                     <option style="font-weight: 700;" value="Cap">Cap</option>
@@ -52,7 +52,7 @@
 <div class="form-group  selection mt-3" id="otherformat" style="display: none;">
     <label for="input-5">Enter Format *</label>
     <input type="text" placeholder="Enter other format" id="other_format"
-        class="form-control other-format @error('other_format') is-invalid @enderror" name="other_format">
+        class="form-control other-format @error('other_format') is-invalid @enderror" name="attributes[other_format]">
 </div>
 <div class="row mt-3">
     <div class="col-md-6 Appliques">
@@ -62,13 +62,13 @@
             </div>
             <div class="d-flex ml-4">
                 <div class="radio" style="margin-right: 30px;">
-                    <label> <input type="radio" id="yes-applique" value="1" name="applique"
+                    <label> <input type="radio" id="yes-applique" value="1" name="attributes[applique]"
                             class="parsley-validated form-check-inline" data-required="true" />Yes
                     </label>
                 </div>
                 <div class="j-span3 j-input form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="no-applique" value="0" name="applique"
+                        <label> <input type="radio" id="no-applique" value="0" name="attributes[applique]"
                                 class="parsley-validated" data-required="true" />&nbsp;No </label>
                     </div>
                 </div>
@@ -83,14 +83,14 @@
             </div>
             <div class="j-span3 form-check-inline">
                 <div class="radio">
-                    <label> <input type="radio" id="sew" value="1" name="sew" class="parsley-validated"
-                            data-required="true" />&nbsp;Yes </label>
+                    <label> <input type="radio" id="sew" value="1" name="attributes[sew-out-sample]"
+                            class="parsley-validated" data-required="true" />&nbsp;Yes </label>
                 </div>
             </div>
             <div class="j-span3 form-check-inline">
                 <div class="radio">
-                    <label> <input type="radio" vid="sew" value="0" name="sew" class="parsley-validated"
-                            data-required="true" />&nbsp;No </label>
+                    <label> <input type="radio" vid="sew" value="0" name="attributes[sew-out-sample]"
+                            class="parsley-validated" data-required="true" />&nbsp;No </label>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="input-5">Design Format *</label>
-            <select class="form-control @error('design_format') is-invalid @enderror" name="design_format"
+            <select class="form-control @error('design_format') is-invalid @enderror" name="attributes[design_format]"
                 id="design-format-digital" required>
                 <option value="" selected="">Design Format</option>
                 <option value="Tajima (*.DST)">Tajima (*.DST)</option>
@@ -169,8 +169,8 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="input-5">Time Frame *</label>
-            <select class="form-control @error('time_frame') is-invalid @enderror" name="time_frame" id="time-frame"
-                required data-placement="Time Fram">
+            <select class="form-control @error('time_frame') is-invalid @enderror" name="attributes[time_frame]"
+                id="time-frame" required data-placement="Time Fram">
                 <option value="" selected="">Time Frame</option>
                 <option value="Normal Turnaround 3 - 24 Hours.">Normal Turnaround 3 - 24
                     Hours.
@@ -194,23 +194,26 @@
             <div class="j-input" style="margin-top: 10px;">
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="1" name="threading_cute_size"
-                                class="parsley-validated" data-required="true" />&nbsp;Cut
+                        <label> <input type="radio" id="cutting" value="1"
+                                name="attributes[threading_cute_size]" class="parsley-validated"
+                                data-required="true" />&nbsp;Cut
                             thread
                             longer than 2 mm </label>
                     </div>
                 </div>
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="2" name="threading_cute_size"
-                                class="parsley-validated" data-required="true" />&nbsp;Cut all
+                        <label> <input type="radio" id="cutting" value="2"
+                                name="attributes[threading_cute_size]" class="parsley-validated"
+                                data-required="true" />&nbsp;Cut all
                             connection threads </label>
                     </div>
                 </div>
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="3" name="threading_cute_size"
-                                class="parsley-validated" data-required="true" />&nbsp;Do
+                        <label> <input type="radio" id="cutting" value="3"
+                                name="attributes[threading_cute_size]" class="parsley-validated"
+                                data-required="true" />&nbsp;Do
                             not
                             cut threads </label>
                     </div>

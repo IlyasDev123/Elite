@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('product_category');
-            $table->tinyInteger('product_type')->default(1);
+            $table->string('product_category')->comment('1 => digitizing, 2 => vector , custom-clothing => 3, custom-patch => 4');
+            $table->tinyInteger('product_type')->default(1)->comment('1 => physical, 2 => digital');
             $table->integer('product_quantity')->nullable();
             $table->string('description')->nullable();
             $table->jsonb('attributes')->nullable();

@@ -13,8 +13,8 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th>#</th>
-                                    <th data-orderable="false">Order Type</th>
-                                    <th>Design Name</th>
+                                    <th data-orderable="false">Product Type</th>
+                                    <th>Product Name</th>
                                     <th>Source file</th>
                                     <th>Action</th>
                                 </tr>
@@ -22,18 +22,18 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $order->order_number }}</td>
 
                                         <td>
-                                            {{ $order->order_type }}
+                                            {{ $order->product->product_type }}
                                         </td>
                                         <td>
-                                            {{ $order->name }}
+                                            {{ $order->product->name }}
                                         </td>
                                         <td>
 
-                                            @if (isset($order->submitOrder->attachments))
-                                                @foreach ($order->submitOrder->attachments as $item)
+                                            @if (isset($order->attachments))
+                                                @foreach ($order->attachments as $item)
                                                     <li>
                                                         <a download="Source" href="{{ Storage::url($item->attachment) }}"
                                                             title="{{ $item->attachment }}">Download</a>

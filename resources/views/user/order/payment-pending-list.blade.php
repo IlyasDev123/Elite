@@ -16,10 +16,10 @@
                             <thead class="text-uppercase text-bold">
                                 <tr>
                                     <th>#</th>
-                                    <th>Design Name</th>
-                                    <th>No of color</th>
-                                    <th>Colors name</th>
-                                    <th>Order Type</th>
+                                    <th>Product Name</th>
+                                    <th>Product Category</th>
+                                    <th>Product Type</th>
+                                    <th>Product Quantity</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
@@ -27,12 +27,12 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->no_of_color }}</td>
-                                        <td>{{ $order->name_of_color }}</td>
-                                        <td>{{ $order->order_type }}</td>
-                                        <td>{{ $order->submitOrder?->price }}</td>
+                                        <td>{{ $order->order_number }}</td>
+                                        <td>{{ $order->product->name }}</td>
+                                        <td>{{ $order->product->product_category }}</td>
+                                        <td>{{ $order->product->product_type }}</td>
+                                        <td>{{ $order->product->product_quantity }}</td>
+                                        <td>{{ $order->price }}</td>
                                         <td>
                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#payment" title="Pay Now">Pay now</a>

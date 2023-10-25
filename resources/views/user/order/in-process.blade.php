@@ -16,21 +16,21 @@
                             <thead class="text-uppercase text-bold">
                                 <tr>
                                     <th>#</th>
-                                    <th>Design Name</th>
-                                    <th>No of color</th>
-                                    <th>Colors name</th>
-                                    <th>Order Type</th>
+                                    <th>Product Name</th>
+                                    <th>Product Category</th>
+                                    <th>Product Type</th>
+                                    <th>Product Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->no_of_color }}</td>
-                                        <td>{{ $order->name_of_color }}</td>
-                                        <td>{{ $order->order_type }}</td>
+                                        <td>{{ $order->order_number }}</td>
+                                        <td>{{ $order->product->name }}</td>
+                                        <td>{{ $order->product->product_category }}</td>
+                                        <td>{{ $order->product->product_type }}</td>
+                                        <td>{{ $order->product->product_quantity }}</td>
                                         <td>Action</td>
                                     </tr>
                                 @endforeach

@@ -6,15 +6,24 @@ use App\Models\Order;
 use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use App\Http\Requests\Order\CreateOrderRequest;
+use App\Http\Services\ProductService;
 
 class OrderController extends Controller
 {
+    protected $productService;
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Pending'])->where('user_id', auth()->id())->get();
+        $orders = Order::with('product')->where('status', Constant::ORDER_STATUS['Pending'])->where('user_id', auth()->id())->get();
         return view('user.order.new', compact('orders'));
     }
 
@@ -23,7 +32,7 @@ class OrderController extends Controller
      */
     public function orderInProcess()
     {
-        $orders = Order::whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Assigned']])->where('user_id', auth()->id())->get();
+        $orders = Order::with('product')->whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Assigned']])->where('user_id', auth()->id())->get();
         return view('user.order.in-process', compact('orders'));
     }
 
@@ -33,7 +42,7 @@ class OrderController extends Controller
     public function paymentPending()
     {
         $intent = auth()->user()->createSetupIntent();
-        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('submitOrder')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('submitOrder', 'product')->get();
 
         return view('user.order.payment-pending-list', compact('orders', 'intent'));
     }
@@ -43,7 +52,7 @@ class OrderController extends Controller
      */
     public function completedOrders()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->where('user_id', auth()->id())->with('submitOrder.attachments')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->where('user_id', auth()->id())->with('attachments', 'product')->get();
 
         return view('user.order.completed-order', compact('orders'));
     }
@@ -62,14 +71,15 @@ class OrderController extends Controller
     {
         try {
             $request['user_id'] = auth()->id();
-            $order = Order::create($request->all());
-            if ($request['files']) {
-                foreach ($request['files'] as $file) {
-                    $order->files()->create([
-                        'file' => storeFiles('orders', $file)
-                    ]);
-                }
-            }
+            $product = $this->productService->storeProduct($request);
+            $order = Order::create([
+                'user_id' => $request->user_id,
+                'order_number' => rand(1, 10) . $product->id, // 'order-1634365471
+                'product_id' => $product->id,
+                "extra_instruction" => $request->extra_instruction,
+                "status" => Constant::ORDER_STATUS['Pending'],
+            ]);
+
             return redirect()->route('orders.index')->with('success', 'Order created successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());

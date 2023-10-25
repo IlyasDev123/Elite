@@ -31,4 +31,10 @@ class Constant
         'Designer' => 1,
         'employee' => 3,
     ];
+
+    const PRODUCT_STATUS = [
+        'Pending' => 1,
+        'Accepted' => 2,
+        'Rejected' => 3,
+    ];
 }

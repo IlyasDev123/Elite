@@ -9,7 +9,7 @@ class SubmitOrderAttachement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'submit_order_id',
+        'order_id',
         'attachment'
     ];
 }

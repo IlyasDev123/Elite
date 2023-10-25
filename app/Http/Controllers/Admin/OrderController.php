@@ -21,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Pending'])->get();
+        $orders = Order::with('product')->where('status', Constant::ORDER_STATUS['Pending'])->get();
         $designes = Admin::where('type', Constant::ROLE['Designer'])->get();
 
         return view('Admin.Panel.order.new-order-list', compact('orders', 'designes'));
@@ -29,26 +29,26 @@ class OrderController extends Controller
 
     public function assignOrdersList()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Assigned'])->with('assignOrder')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Assigned'])->with('assignOrder', 'product')->get();
 
         return view('Admin.Panel.order.assign-order-list', compact('orders'));
     }
 
     public function readyOrdersList()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Processing'])->with('submitOrder.attachments')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Processing'])->with('product', 'attachments')->get();
         return view('Admin.Panel.order.ready-order-list', compact('orders'));
     }
 
     public function PaymentPendingOrdersList()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->with('submitOrder.attachments')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->with('attachments', 'product')->get();
         return view('Admin.Panel.order.ready-order-list', compact('orders'));
     }
 
     public function completedOrdersList()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->with('submitOrder.attachments')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->with('attachments', 'product')->get();
         return view('Admin.Panel.order.completed-order-list', compact('orders'));
     }
 
@@ -96,7 +96,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('files', 'user')->find($id);
+        $order = Order::with('user', 'product.images')->find($id);
         return view('Admin.Panel.order.order-detail', compact('order'));
     }
 
