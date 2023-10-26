@@ -12,8 +12,8 @@
                         <table id="datatable" class="table align-middle">
                             <thead class="text-uppercase">
                                 <tr>
-                                    <th>#</th>
-                                    <th data-orderable="false">Product Type</th>
+                                    <th class="col-1">#</th>
+                                    <th data-orderable="false">Product Category</th>
                                     <th>Product Name</th>
                                     <th>Instruction</th>
                                     <th>Assigned To</th>
@@ -26,13 +26,13 @@
                                         <td>{{ $order->order_number }}</td>
 
                                         <td>
-                                            {{ $order->product->product_type }}
+                                            {{ $order->product->product_category }}
                                         </td>
                                         <td>
                                             {{ $order->product->name }}
                                         </td>
                                         <td>
-                                            {{ $order->description }}
+                                            {{ $order->assignOrder->description }}
                                         </td>
                                         <td>
                                             {{ $order?->assignOrder?->user?->name }}

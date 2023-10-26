@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Utilities\Constant;
 use Illuminate\Http\Request;
+use App\Services\ProductService;
 use App\Http\Requests\Order\CreateOrderRequest;
-use App\Http\Services\ProductService;
 
 class OrderController extends Controller
 {
@@ -42,11 +42,18 @@ class OrderController extends Controller
     public function paymentPending()
     {
         $intent = auth()->user()->createSetupIntent();
-        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('submitOrder', 'product')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('product')->get();
 
         return view('user.order.payment-pending-list', compact('orders', 'intent'));
     }
 
+
+    public function InShippingOrders()
+    {
+        $orders = Order::where('status', Constant::ORDER_STATUS['Shipping_process'])->where('user_id', auth()->id())->with('attachments', 'product')->get();
+
+        return view('user.order.shipping-process', compact('orders'));
+    }
     /**
      * Display a listing of the resource.
      */
@@ -74,7 +81,7 @@ class OrderController extends Controller
             $product = $this->productService->storeProduct($request);
             $order = Order::create([
                 'user_id' => $request->user_id,
-                'order_number' => rand(1, 10) . $product->id, // 'order-1634365471
+                'order_number' => rand(1333, 100000) . $product->id, // 'order-1634365471
                 'product_id' => $product->id,
                 "extra_instruction" => $request->extra_instruction,
                 "status" => Constant::ORDER_STATUS['Pending'],

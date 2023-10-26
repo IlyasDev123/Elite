@@ -8,6 +8,7 @@ use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 
 class QuoteController extends Controller
 {
@@ -115,12 +116,28 @@ class QuoteController extends Controller
 
     public function acceptQuote(Request $request)
     {
-        $quote = Quote::findOrFail($request->quote_id);
-        $quote->update([
-            'status' => Constant::QUOTE_STATUS['Accepted']
-        ]);
+        try {
+            DB::beginTransaction();
+            $quote = Quote::findOrFail($request->quote_id);
+            $quote->update([
+                'status' => Constant::QUOTE_STATUS['Accepted']
+            ]);
 
-        return redirect()->route('quotes.index')->with('success', 'Status updated successfully.');
+            Order::create([
+                'user_id' => auth()->id(),
+                'order_number' => rand(1333, 100000) . $quote->product_id,
+                'product_id' => $quote->product_id,
+                'price' => $quote->price,
+                'description' => $quote->instruction_notes,
+                'status' => Constant::ORDER_STATUS['Pending']
+            ]);
+            DB::commit();
+
+            return redirect()->route('quotes.index')->with('success', 'Status updated successfully.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong please try again.' . $th->getMessage());
+        }
     }
 
     public function rejectQuote(Request $request)

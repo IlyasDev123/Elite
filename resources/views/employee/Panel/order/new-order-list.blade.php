@@ -12,10 +12,13 @@
                         <table id="datatable" class="table align-middle">
                             <thead class="text-uppercase">
                                 <tr>
-                                    <th>#</th>
-                                    <th data-orderable="false">Order Type</th>
-                                    <th>Design Name</th>
-                                    <th data-orderable="false">Action</th>
+                                    <th class="col-1">#</th>
+                                    <th>Product Name</th>
+                                    <th>Product Quantity</th>
+                                    <th>Product Category</th>
+                                    <th>Order Description</th>
+                                    <th>Instruction</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,17 +27,27 @@
                                         <td>{{ $loop->iteration }}</td>
 
                                         <td>
-                                            {{ $order->order_type }}
+                                            {{ $order->product->name }}
                                         </td>
                                         <td>
-                                            {{ $order->name }}
+                                            {{ $order->product->product_quantity }}
+                                        </td>
+                                        <td>
+                                            {{ $order->product->product_category }}
+                                        </td>
+                                        <td>
+                                            {{ $order->description }}
+                                        </td>
+                                        <td>
+                                            {{ $order->assignOrder->description }}
                                         </td>
                                         <td>
                                             <a href="{{ route('employee.orders.show', $order->id) }}" title="View order"><i
                                                     class="text-primary" data-feather="eye"></i></a>
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#submit-order"
-                                                title="Submit Order"><i class="text-danger ms-2"
+                                            <a href="#" data-bs-toggle="modal" class="submit-order"
+                                                data-bs-target="#submit-order" title="Submit Order"
+                                                data-id="{{ $order->id }}"><i class="text-danger ms-2"
                                                     data-feather="file-text"></i></a>
                                         </td>
                                     </tr>

@@ -11,11 +11,11 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                        <input type="hidden" name="order_id" value="" id="order_id">
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Instruction</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="submission_note"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="formFileMultiple" class="form-label">Upload Source files(eg: zip, image,
@@ -33,3 +33,12 @@
         </div>
     </div>
 </div>
+
+@section('js-script')
+    <script>
+        $(".submit-order").click(function() {
+            var ids = $(this).attr('data-id');
+            $("#order_id").val(ids);
+        })
+    </script>
+@endsection

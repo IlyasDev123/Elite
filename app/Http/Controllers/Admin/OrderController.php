@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('product')->where('status', Constant::ORDER_STATUS['Pending'])->get();
-        $designes = Admin::where('type', Constant::ROLE['Designer'])->get();
+        $designes = Admin::whereIn('type', [Constant::ROLE['Designer'], Constant::ROLE['Production']])->get();
 
         return view('Admin.Panel.order.new-order-list', compact('orders', 'designes'));
     }
@@ -36,7 +36,7 @@ class OrderController extends Controller
 
     public function readyOrdersList()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Processing'])->with('product', 'attachments')->get();
+        $orders = Order::whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Payment_pending']])->with('product', 'attachments')->get();
         return view('Admin.Panel.order.ready-order-list', compact('orders'));
     }
 
@@ -44,6 +44,12 @@ class OrderController extends Controller
     {
         $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->with('attachments', 'product')->get();
         return view('Admin.Panel.order.ready-order-list', compact('orders'));
+    }
+
+    public function inShippingOrdersList()
+    {
+        $orders = Order::where('status', Constant::ORDER_STATUS['Shipping_process'])->with('attachments', 'product')->get();
+        return view('Admin.Panel.order.shippment-process', compact('orders'));
     }
 
     public function completedOrdersList()
@@ -67,21 +73,21 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try {
-            $submitOrder = SubmitOrder::create([
-                'order_id' => $request->order_id,
-                'user_id' => auth()->guard('admin')->id(),
-                'description' => $request->description ?? null,
+            $order = Order::find($request->order_id);
+            $order->update([
+                'submission_note' => $request->submission_note ?? null,
+                'status' => Constant::ORDER_STATUS['Processing'],
             ]);
 
             if ($request['attachments']) {
                 foreach ($request['attachments'] as $file) {
-                    $submitOrder->attachments()->create([
-                        'attachment' => storeFiles('submitOrders', $file)
+                    $order->attachments()->create([
+                        'attachment' => storeFiles('source-files', $file)
                     ]);
                 }
             }
 
-            $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Processing']);
+            // $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Processing']);
             DB::commit();
 
             return redirect()->route('admin.orders')->with('success', 'Order submitted successfully');
@@ -96,7 +102,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('user', 'product.images')->find($id);
+        $order = Order::with('user', 'product.productImages', 'shippingDetail')->find($id);
         return view('Admin.Panel.order.order-detail', compact('order'));
     }
 
@@ -148,10 +154,11 @@ class OrderController extends Controller
     {
         try {
             DB::beginTransaction();
-            SubmitOrder::find($request->submit_order_id)->update([
-                "price" => $request->price
+            Order::find($request->order_id)->update([
+                "price" => $request->price,
+                "status" => Constant::ORDER_STATUS['Payment_pending'],
             ]);
-            $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Payment_pending']);
+            // $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Payment_pending']);
 
             DB::commit();
             return redirect()->route('admin.orders.ready')->with('success', 'Price added successfully');
@@ -166,5 +173,20 @@ class OrderController extends Controller
         return Order::find($orderId)->update([
             'status' => $status
         ]);
+    }
+
+    public function updateOrderShippingStatus(Request $request)
+    {
+        Order::find($request->order_id)->update([
+            'tracker_id' => $request->tracker_id,
+        ]);
+
+        return redirect()->route('admin.orders.shipment')->with('success', 'Updated successfully');
+    }
+
+    public function orderDelivered($order_id)
+    {
+        $this->updateOrderStatus($order_id, Constant::ORDER_STATUS['Completed']);
+        return redirect()->route('admin.orders.shipment')->with('success', 'Order delivered successfully');
     }
 }

@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::get('order/in-process', 'orderInProcess')->name('orders.in-process');
         Route::get('order/payment-pending', 'paymentPending')->name('orders.payment-pending');
         Route::get('order/completed', 'completedOrders')->name('orders.completed');
+        Route::get('order/shipping-process', 'InShippingOrders')->name('orders.shipping-process');
     });
 
     Route::controller(\App\Http\Controllers\StripeController::class)->group(function () {
@@ -88,7 +89,10 @@ Route::prefix('admin')->group(function () {
             Route::get('order/assigned', 'assignOrdersList')->name('admin.orders.assigned');
             Route::get('order/ready', 'readyOrdersList')->name('admin.orders.ready');
             Route::get('order/completed', 'completedOrdersList')->name('admin.orders.completed');
+            Route::get('order/shipping-process', 'inShippingOrdersList')->name('admin.orders.shipment');
             Route::post('order/price', 'submitPrice')->name('admin.orders.price');
+            Route::post('order/update-shipment', 'updateOrderShippingStatus')->name('admin.orders.shipment-update');
+            Route::get('order/delivered/{order_id}', 'orderDelivered')->name('admin.orders.delivered');
         });
 
         Route::controller(\App\Http\Controllers\Admin\QuoteController::class)->group(function () {

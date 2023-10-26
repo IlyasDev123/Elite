@@ -23,7 +23,7 @@ class PaymentRequest extends FormRequest
     {
         return [
             'payment_method' => 'required',
-            'submit_order_id' => 'required|exists:submit_orders,id',
+            'order_id' => 'required|exists:orders,id',
         ];
     }
 }

@@ -1,6 +1,6 @@
-<?
+<?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Models\Product;
 use App\Utilities\Constant;
@@ -34,9 +34,9 @@ class ProductService
             'product_category' => $request->product_category,
             'product_quantity' => $request->product_quantity ?? 1,
             'product_type' => $request->product_type,
-            'description' => $request->description,
+            'description' => $request->extra_instruction,
             'price' => $request->price,
-            'attributes' => json_encode($request->attributes, true),
+            'attributes' => json_encode($request['attributes'], true),
             'status' => Constant::PRODUCT_STATUS['Pending'],
         ]);
         $this->uploadAttachments($request, $product);

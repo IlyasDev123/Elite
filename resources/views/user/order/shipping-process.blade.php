@@ -6,7 +6,7 @@
     </div>
     <div class="container-fluid custom__card">
         <div class="d-flex justify-center">
-            <span class="table-title text-center ">New Orders Lists</span>
+            <span class="table-title text-center ">Orders in Shipping</span>
         </div>
         <div class="row">
             <div class="col-12">
@@ -20,8 +20,8 @@
                                     <th>Product Name</th>
                                     <th>Product Category</th>
                                     <th>Product Type</th>
-                                    <th>Product Quantity</th>
-                                    <th>Action</th>
+                                    <th>Tracking ID</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,8 +32,14 @@
                                         <td>{{ $order->product->name }}</td>
                                         <td>{{ $order->product->product_category }}</td>
                                         <td>{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</td>
-                                        <td>{{ $order->product->product_quantity }}</td>
-                                        <td>Action</td>
+                                        <td>{{ $order->tracker_id ?? null }}</td>
+                                        <td>
+                                            @if ($order->status == 6 && $order->tracker_id == null)
+                                                <span class="text-primary">Shipping Processing</span>
+                                            @elseif($order->status == 6 && $order->tracker_id != null)
+                                                <span class="text-info">Shipped</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

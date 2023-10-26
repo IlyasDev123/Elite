@@ -21,6 +21,10 @@ return new class extends Migration
             $table->integer('no_of_review')->default(0);
             $table->boolean('is_paid')->default(false);
             $table->text('description')->nullable();
+            $table->text('submission_note')->nullable();
+            $table->text('final_review_note')->nullable();
+            $table->string('tracker_id')->nullable();
+            $table->boolean('is_delivered')->default(false);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

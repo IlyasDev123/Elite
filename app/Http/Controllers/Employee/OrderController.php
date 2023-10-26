@@ -17,14 +17,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Assigned'])->whereHas('assignOrder', fn ($q) => $q->where('user_id', auth()->guard('admin')->id()))->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Assigned'])->withWhereHas('assignOrder', fn ($q) => $q->where('user_id', auth()->guard('admin')->id()))->with('product')->get();
 
         return view('employee.Panel.order.new-order-list', compact('orders'));
     }
 
     public function completedOrdersList()
     {
-        $orders = Order::whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Payment_pending'], Constant::ORDER_STATUS['Completed']])->whereHas('assignOrder', fn ($q) => $q->where('user_id', auth()->guard('admin')->id()))->with('submitOrder.attachments')->get();
+        $orders = Order::whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Payment_pending'], Constant::ORDER_STATUS['Completed']])->withWhereHas('assignOrder', fn ($q) => $q->where('user_id', auth()->guard('admin')->id()))->with('attachments', 'product')->get();
 
         return view('employee.Panel.order.completed-order-list', compact('orders'));
     }
@@ -45,21 +45,21 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
 
-            $submitOrder = SubmitOrder::create([
-                'order_id' => $request->order_id,
-                'user_id' => auth()->guard('admin')->id(),
-                'description' => $request->description ?? null,
+            $order = Order::find($request->order_id);
+            $order->update([
+                'submission_note' => $request->submission_note ?? null,
+                'status' => Constant::ORDER_STATUS['Payment_pending'],
             ]);
 
             if ($request['attachments']) {
                 foreach ($request['attachments'] as $file) {
-                    $submitOrder->attachments()->create([
-                        'attachment' => storeFiles('submitOrders', $file)
+                    $order->attachments()->create([
+                        'attachment' => storeFiles('source-files', $file)
                     ]);
                 }
             }
 
-            $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Processing']);
+            // $this->updateOrderStatus($request->order_id, Constant::ORDER_STATUS['Processing']);
 
             DB::commit();
 
@@ -75,7 +75,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('files', 'user')->find($id);
+        $order = Order::with('product.productImages', 'user')->find($id);
         return view('employee.Panel.order.order-detail', compact('order'));
     }
 

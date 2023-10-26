@@ -19,5 +19,12 @@ class DesignerSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'type' => 1,
         ]);
+
+        Admin::create([
+            'name' => 'Production Manager',
+            'email' => 'production@yopmail.com',
+            'password' => bcrypt('12345678'),
+            'type' => 3,
+        ]);
     }
 }

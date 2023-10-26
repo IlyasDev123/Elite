@@ -23,7 +23,6 @@ class AddPriceRequest extends FormRequest
     {
         return [
             "price" => "required",
-            "submit_order_id" => "required",
             "order_id" => "required",
         ];
     }

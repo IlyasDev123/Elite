@@ -16,6 +16,7 @@
                             <thead class="text-uppercase text-bold">
                                 <tr>
                                     <th>#</th>
+                                    <th>Order No</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
                                     <th>Product Type</th>
@@ -25,23 +26,25 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->order_number }}</td>
                                         <td>{{ $order->product->name }}</td>
                                         <td>{{ $order->product->product_category }}</td>
-                                        <td>{{ $order->product->product_type }}</td>
+                                        <td>{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</td>
+                                        <td>
+                                            @if (isset($order->attachments))
+                                                @foreach ($order->attachments as $item)
+                                                    <li>
+                                                        <a download="Source" href="{{ Storage::url($item->attachment) }}"
+                                                            title="{{ $item->attachment }}">Download</a>
+                                                    </li>
 
-                                        @if (isset($order->attachments))
-                                            @foreach ($order->attachments as $item)
-                                                <li>
-                                                    <a download="Source" href="{{ Storage::url($item->attachment) }}"
-                                                        title="{{ $item->attachment }}">Download</a>
-                                                </li>
-
-                                                <br>
-                                            @endforeach
-                                        @endif
+                                                    <br>
+                                                @endforeach
+                                            @endif
 
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

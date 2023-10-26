@@ -13,10 +13,13 @@
                         <div class="form-group mt-1">
                             <label for="input-1">Order Type</label>
                             <select class="form-control" name="product_category" id="ordertype">
-                                <option value="1" selected>Digitizing</option>
-                                <option value="2">Vector Conversion</option>
+                                <option value="digitizing" selected>Digitizing</option>
+                                <option value="vector">Vector Conversion</option>
                             </select>
                         </div>
+                        <input type="hidden" name="product_type" id="textbox_id1" class="form-control other-placement"
+                            value="2">
+
                         <div class="mt-3">
                             <label for="input-2">Design Name *</label>
                             <input type="text" class="form-control @error('name') is-invalid  @enderror" name="name"
@@ -124,14 +127,14 @@
     <script>
         $(document).ready(function() {
             const val = $('#ordertype').val();
-            if (val === '1') {
+            if (val === 'digitizing') {
                 $('#vector-field select').prop('disabled', true);
                 $('#vector-field input').prop('disabled', true);
                 $('#vector-field').hide();
             }
             $('#ordertype').change(function() {
                 const selectedValue = $(this).val();
-                if (selectedValue === '1') {
+                if (selectedValue === 'digitizing') {
                     $('#vector-field select').prop('disabled', true);
                     $('#vector-field input').prop('disabled', true);
                     $('#digitizing-field select').prop('disabled', false);
@@ -142,8 +145,8 @@
                     $('#vector-field select').prop('disabled', false);
                     $('#vector-field input').prop('disabled', false);
                 }
-                $('#vector-field').toggle(selectedValue === '2');
-                $('#digitizing-field').toggle(selectedValue === '1');
+                $('#vector-field').toggle(selectedValue === 'vector');
+                $('#digitizing-field').toggle(selectedValue === 'digitizing');
                 $('#onSubmit').click(function() {
                     e.preventDefault();
                 });

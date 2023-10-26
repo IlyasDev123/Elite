@@ -62,13 +62,13 @@
             </div>
             <div class="d-flex ml-4">
                 <div class="radio" style="margin-right: 30px;">
-                    <label> <input type="radio" id="yes-applique" value="1" name="attributes[applique]"
+                    <label> <input type="radio" id="yes-applique" value="yes" name="attributes[applique]"
                             class="parsley-validated form-check-inline" data-required="true" />Yes
                     </label>
                 </div>
                 <div class="j-span3 j-input form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="no-applique" value="0" name="attributes[applique]"
+                        <label> <input type="radio" id="no-applique" value="No" name="attributes[applique]"
                                 class="parsley-validated" data-required="true" />&nbsp;No </label>
                     </div>
                 </div>
@@ -84,13 +84,13 @@
             <div class="j-span3 form-check-inline">
                 <div class="radio">
                     <label> <input type="radio" id="sew" value="1" name="attributes[sew-out-sample]"
-                            class="parsley-validated" data-required="true" />&nbsp;Yes </label>
+                            class="parsley-validated" data-required="true" value="yes" />&nbsp;Yes </label>
                 </div>
             </div>
             <div class="j-span3 form-check-inline">
                 <div class="radio">
                     <label> <input type="radio" vid="sew" value="0" name="attributes[sew-out-sample]"
-                            class="parsley-validated" data-required="true" />&nbsp;No </label>
+                            class="parsley-validated" data-required="true" value="no" />&nbsp;No </label>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
             <div class="j-input" style="margin-top: 10px;">
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="1"
+                        <label> <input type="radio" id="cutting" value="thread longer than 2 mm "
                                 name="attributes[threading_cute_size]" class="parsley-validated"
                                 data-required="true" />&nbsp;Cut
                             thread
@@ -203,7 +203,7 @@
                 </div>
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="2"
+                        <label> <input type="radio" id="cutting" value="Cut all connection threads"
                                 name="attributes[threading_cute_size]" class="parsley-validated"
                                 data-required="true" />&nbsp;Cut all
                             connection threads </label>
@@ -211,7 +211,7 @@
                 </div>
                 <div class="j-span3 form-check-inline">
                     <div class="radio">
-                        <label> <input type="radio" id="cutting" value="3"
+                        <label> <input type="radio" id="cutting" value="Do not cut threads"
                                 name="attributes[threading_cute_size]" class="parsley-validated"
                                 data-required="true" />&nbsp;Do
                             not

@@ -13,7 +13,7 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th>#</th>
-                                    <th data-orderable="false">Product Type</th>
+                                    <th data-orderable="false">Product Category</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
                                     <th>Source file</th>
@@ -26,7 +26,7 @@
                                         <td>{{ $order->order_number }}</td>
 
                                         <td>
-                                            {{ $order->product->product_type }}
+                                            {{ $order->product->product_category }}
                                         </td>
                                         <td>
                                             {{ $order->product->name }}
@@ -50,8 +50,14 @@
 
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#detailOrder" title="Detail Order">Submit Price</a>
+                                            @if ($order->status == App\Utilities\Constant::ORDER_STATUS['Payment_pending'])
+                                                <span class="badge bg-primary">Payment Pending</span>
+                                            @elseif($order->status == App\Utilities\Constant::ORDER_STATUS['Processing'] && $order->price == null)
+                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#detailOrder" title="Detail Order">Submit Price</a>
+                                            @elseif($order->status == App\Utilities\Constant::ORDER_STATUS['Completed'])
+                                                <span class="badge bg-success">Completed</span>
+                                            @endif
 
                                         </td>
                                     </tr>
@@ -63,8 +69,9 @@
             </div>
         </div>
     </div>
-
-    @include('Admin.Panel.order.submit-price-modal', ['order' => $order])
+    @isset($order)
+        @include('Admin.Panel.order.submit-price-modal', ['order' => $order])
+    @endisset
 @endsection
 @section('js-script')
     <script>

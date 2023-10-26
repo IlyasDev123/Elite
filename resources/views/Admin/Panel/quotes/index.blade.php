@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container-fluid card">
-        <div class="d-flex justify-center">
-            <span class="table-title text-center ">Quotes List</span>
+        <div class="m-3">
+            <h2 class="">Quotes List</h2>
         </div>
         <div class="row">
             <div class="col-12">
@@ -55,8 +55,10 @@
                                                 <i class="fa fa-eye"></i></a>
 
                                             @if ($quote->status == 1)
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#detailQuote"
-                                                    title="Please set Price">
+                                                <a href="#" data-bs-toggle="modal" class="detail-quote"
+                                                    data-bs-target="#detailQuote" data-id="{{ $quote->id }}"
+                                                    data-bs-toggle="tooltip" data-price="{{ $quote->price }}">
+
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
                                             @endif
@@ -73,9 +75,9 @@
         </div>
     </div>
 
-
-
-    @includeIf('Admin.Panel.quotes.price-modal', ['quote' => $quote])
+    @isset($quotes)
+        @include('Admin.Panel.quotes.price-modal', ['quote' => $quote])
+    @endisset
 @endsection
 
 @section('js-script')

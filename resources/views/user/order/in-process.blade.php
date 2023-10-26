@@ -16,6 +16,7 @@
                             <thead class="text-uppercase text-bold">
                                 <tr>
                                     <th>#</th>
+                                    <th>Order No</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
                                     <th>Product Type</th>
@@ -26,10 +27,11 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $order->order_number }}</td>
                                         <td>{{ $order->product->name }}</td>
                                         <td>{{ $order->product->product_category }}</td>
-                                        <td>{{ $order->product->product_type }}</td>
+                                        <td>{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</td>
                                         <td>{{ $order->product->product_quantity }}</td>
                                         <td>Action</td>
                                     </tr>

@@ -5,6 +5,8 @@
         href="{{ route('admin.orders.assigned') }}">Assign Orders</a>
     <a class="btn btn-success {{ Route::currentRouteName() == 'admin.orders.ready' ? 'active' : '' }}"
         href="{{ route('admin.orders.ready') }}">Ready Orders</a>
+    <a class="btn btn-info {{ Route::currentRouteName() == 'admin.orders.shipment' ? 'active' : '' }}"
+        href="{{ route('admin.orders.shipment') }}">Shipment</a>
     <a class="btn btn-info {{ Route::currentRouteName() == 'admin.orders.completed' ? 'active' : '' }}"
         href="{{ route('admin.orders.completed') }}">Completed Orders</a>
 </div>

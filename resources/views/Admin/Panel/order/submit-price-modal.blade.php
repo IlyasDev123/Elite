@@ -12,7 +12,6 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <input type="hidden" name="submit_order_id" value="{{ $order->submitOrder->id }}" />
                         <input type="hidden" name="order_id" value="{{ $order->id }}" />
                         <div class="mb-3">
                             <label for="price" class="form-label">Price *</label>

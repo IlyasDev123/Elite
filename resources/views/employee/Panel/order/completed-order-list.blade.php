@@ -12,11 +12,12 @@
                         <table id="datatable" class="table align-middle">
                             <thead class="text-uppercase">
                                 <tr>
-                                    <th>#</th>
-                                    <th data-orderable="false">Order Type</th>
-                                    <th>Design Name</th>
-                                    <th>Source file</th>
-                                    <th>Action</th>
+                                    <th class="col-1">#</th>
+                                    <th>Product Name</th>
+                                    <th>Product Category</th>
+                                    <th data-orderable="false">Order Description</th>
+                                    <th data-orderable="false">Source file</th>
+                                    <th data-orderable="false">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,15 +26,18 @@
                                         <td>{{ $loop->iteration }}</td>
 
                                         <td>
-                                            {{ $order->order_type }}
+                                            {{ $order->product->name }}
                                         </td>
                                         <td>
-                                            {{ $order->name }}
+                                            {{ $order->product->product_category }}
+                                        </td>
+                                        <td>
+                                            {{ $order->assignOrder->description }}
                                         </td>
                                         <td>
 
-                                            @if (isset($order->submitOrder->attachments))
-                                                @foreach ($order->submitOrder->attachments as $item)
+                                            @if (isset($order->attachments))
+                                                @foreach ($order->attachments as $item)
                                                     <li>
                                                         <a download="Source" href="{{ Storage::url($item->attachment) }}"
                                                             title="{{ $item->attachment }}">Download</a>
