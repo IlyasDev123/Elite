@@ -102,7 +102,7 @@
                         </div>
                         <div class="form-group mt-3">
                             <label for="input-2">Additional Instructions.</label>
-                            <textarea class="form-control" spellcheck="false" name="extra_instruction"></textarea>
+                            <textarea class="form-control" spellcheck="false" name="description"></textarea>
                         </div>
                         <div class="form-group mt-3">
 

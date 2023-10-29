@@ -45,23 +45,29 @@
     <nav class="main__menu">
         <ul>
             <li>
-                <a href="">Dashboard</a>
+                <a href="{{ route('user.dashboard') }}"
+                    class="{{ Route::currentRouteName() == 'user.dashboard' ? 'active' : '' }}">Dashboard</a>
             </li>
             <li>
-                <a href="">Hot Deal</a>
+                <a href="{{ route('quotes.create') }}"
+                    class="{{ Route::currentRouteName() == 'quotes.create' ? 'active' : '' }}">Custom Patch</a>
             </li>
             <li>
-                <a href="">All Quote Records</a>
+                <a href="{{ route('emborided-patches') }}"
+                    class="{{ Route::currentRouteName() == 'emborided-patches' ? 'active' : '' }}">Custom Clothing</a>
             </li>
             <li>
-                <a href="{{ route('orders.index') }}">All Order Records</a>
+                <a href="{{ route('quotes.index') }}"
+                    class="{{ Route::currentRouteName() == 'quotes.index' ? 'active' : '' }}">All Quote Records</a>
+            </li>
+            <li>
+                <a href="{{ route('orders.index') }}"
+                    class="{{ Route::currentRouteName() == 'orders.index' ? 'active' : '' }}">All Order Records</a>
             </li>
             <li>
                 <a href="">Invoice</a>
             </li>
-            <li>
-                <a href="">Profile</a>
-            </li>
+
         </ul>
     </nav>
 

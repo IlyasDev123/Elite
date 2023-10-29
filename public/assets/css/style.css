@@ -398,3 +398,46 @@ section.main__section {
     background-color: #d6d6c2 !important;
 }
 
+.statistic__card{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.statistic__card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: center;
+    margin: 10px 0;
+    color: #000;
+}
+
+.statistic__card p {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: center;
+    margin: 10px 0;
+    color: #000;
+
+}
+
+.has__drowdown > a.active{
+    color: #93fa04f0;
+}
+
+.has__drowdown > a:hover{
+    color: #93fa04f0;
+}
+
+.main__menu >ul >li > a.active{
+    color: #93fa04f0;
+}
+
+.main__menu >ul >li > a.hover{
+    color: #93fa04f0;
+}

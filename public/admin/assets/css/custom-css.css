@@ -359,3 +359,8 @@ padding: 0;
     border-color: #17a2b8 !important;
 
 }
+
+.nav-item .active{
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}

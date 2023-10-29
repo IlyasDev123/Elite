@@ -83,7 +83,7 @@ class OrderController extends Controller
                 'user_id' => $request->user_id,
                 'order_number' => rand(1333, 100000) . $product->id, // 'order-1634365471
                 'product_id' => $product->id,
-                "extra_instruction" => $request->extra_instruction,
+                "description" => $request->description,
                 "status" => Constant::ORDER_STATUS['Pending'],
             ]);
 
@@ -98,7 +98,8 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::with('product.productImages', 'attachments')->find($id);
+        return view('user.order.order-detail', compact('order'));
     }
 
     /**

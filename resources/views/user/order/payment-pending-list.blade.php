@@ -36,11 +36,16 @@
                                         <td>{{ $order->product->product_quantity }}</td>
                                         <td>{{ $order->price }}</td>
                                         <td>
+
+
                                             <a href="#" class="btn btn-primary payment-btn"
                                                 data-id="{{ $order->id }}" data-price="{{ $order->price }}"
                                                 data-product-type="{{ $order->product->product_type }}"
                                                 data-profuct-quanity="{{ $order->product->product_quantity }}"
                                                 data-bs-toggle="modal" data-bs-target="#payment" title="Pay Now">Pay now</a>
+                                            <a class="btn btn-primary rounded mt-1"
+                                                href="{{ route('orders.show', $order->id) }}" title="View order">Detail</a>
+
                                         </td>
                                     </tr>
                                 @endforeach

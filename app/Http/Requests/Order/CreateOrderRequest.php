@@ -25,7 +25,7 @@ class CreateOrderRequest extends FormRequest
             "name" => "required|string",
             "product_category" => "required|string",
             "product_type" => "required|string",
-            "extra_instruction" => "nullable|string",
+            "description" => "nullable|string",
             "attributes" => "required|array",
         ];
     }

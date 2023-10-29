@@ -12,7 +12,7 @@
                         <table id="datatable" class="table align-middle">
                             <thead class="text-uppercase">
                                 <tr>
-                                    <th>#</th>
+                                    <th>SNO#</th>
                                     <th>Order No</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
@@ -50,9 +50,8 @@
 
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-primary"
-                                                title="Detail Order">Detail</a>
-
+                                            <a href="{{ route('admin.orders.show', $order->id) }}" title="View order"><i
+                                                    class="text-primary" data-feather="eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

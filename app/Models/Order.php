@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\OrderMeta;
+use App\Models\Notification;
 use App\Models\ShippingDetail;
 use App\Models\SubmitOrderAttachement;
 use Illuminate\Database\Eloquent\Model;
@@ -59,5 +60,10 @@ class Order extends Model
     public function shippingDetail()
     {
         return $this->hasOne(ShippingDetail::class, 'order_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
     }
 }

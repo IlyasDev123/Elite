@@ -102,7 +102,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('user', 'product.productImages', 'shippingDetail')->find($id);
+        $order = Order::with('user', 'product.productImages', 'shippingDetail', 'assignOrder', 'attachments')->find($id);
         return view('Admin.Panel.order.order-detail', compact('order'));
     }
 

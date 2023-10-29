@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Quote;
 use App\Utilities\Constant;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -15,7 +16,8 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $orderState =  $this->dashboardState();
-        return view('Admin.Panel.dashboard', compact('orderState'));
+        $quotes =  $this->dashboardQuoteState();
+        return view('Admin.Panel.dashboard', compact('orderState', 'quotes'));
     }
 
     public function employeeDashboard()
@@ -36,6 +38,16 @@ class DashboardController extends Controller
         return $order;
     }
 
+    public function dashboardQuoteState()
+    {
+        $quotes['new'] = $this->quoteStatistics()->where('status', Constant::QUOTE_STATUS['Pending'])->count();
+        $quotes['accepted'] = $this->quoteStatistics()->where('status', Constant::QUOTE_STATUS['Accepted'])->count();
+        $quotes['rejected'] = $this->quoteStatistics()->where('status', Constant::QUOTE_STATUS['Rejected'])->count();
+        $quotes['payment_pending'] = $this->quoteStatistics()->where('status', Constant::QUOTE_STATUS['Payment_pending'])->count();
+        $quotes['total'] = $quotes['new'] + $quotes['accepted'] + $quotes['rejected'];
+        return $quotes;
+    }
+
     public function dashboardDesignerState()
     {
         $order['assigned'] = $this->orderCountDesigner([Constant::ORDER_STATUS['Assigned']]);
@@ -52,5 +64,10 @@ class DashboardController extends Controller
     function orderCountDesigner($status)
     {
         return Order::whereIn('status', $status)->whereHas('assignOrder', fn ($query) => $query->where('user_id', auth('admin')->id()))->count();
+    }
+
+    public function quoteStatistics()
+    {
+        return Quote::get();
     }
 }

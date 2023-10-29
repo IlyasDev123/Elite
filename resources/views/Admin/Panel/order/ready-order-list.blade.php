@@ -17,6 +17,7 @@
                                     <th>Product Name</th>
                                     <th>Price</th>
                                     <th>Source file</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,6 +60,10 @@
                                                 <span class="badge bg-success">Completed</span>
                                             @endif
 
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.orders.show', $order->id) }}" title="View order"><i
+                                                    class="text-primary" data-feather="eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

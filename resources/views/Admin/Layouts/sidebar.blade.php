@@ -39,9 +39,9 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.orders') }}"
-                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'orders' ? 'active' : '' }}">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'admin.orders' ? 'active' : '' }}">
                             <span class="sidebar-icon">
-                                <i data-feather="bar-chart" class="fe-2x"></i>
+                                <i data-feather="shopping-cart" class="fe-2x"></i>
                             </span>
                             <span class="sidebar-text">Orders</span>
                         </a>
@@ -49,9 +49,9 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.quotes') }}"
-                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'quotes' ? 'active' : '' }}">
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'admin.quotes' ? 'active' : '' }}">
                             <span class="sidebar-icon">
-                                <i data-feather="bar-chart" class="fe-2x"></i>
+                                <i data-feather="file-plus" class="fe-2x"></i>
                             </span>
                             <span class="sidebar-text">Quotes</span>
                         </a>

@@ -17,9 +17,20 @@ class QuoteController extends Controller
      */
     public function index(Quote $quote)
     {
-        $quotes = $quote->where('user_id', auth()->user()->id)->with('product')->latest()->get();
+        $status = request()->query('status');
+        $quotes = $quote->where('user_id', auth()->user()->id)->with('product')->latest()
+            ->when($status, fn ($query) => $query->where('status', $this->getQuoteStatus($status)))->get();
         return view('user.quotes.index', compact('quotes'));
     }
+
+    protected function getQuoteStatus($status)
+    {
+        $quoteStatuses = Constant::QUOTE_STATUS;
+        return array_key_exists($status, $quoteStatuses) ? $quoteStatuses[$status] : null;
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

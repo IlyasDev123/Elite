@@ -45,10 +45,10 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
 
-            $order = Order::find($request->order_id);
+            $order = Order::with('product')->find($request->order_id);
             $order->update([
                 'submission_note' => $request->submission_note ?? null,
-                'status' => Constant::ORDER_STATUS['Payment_pending'],
+                'status' => $order->product->product_type == Constant::PRODUCT_STATUS['Physiacl'] ? Constant::ORDER_STATUS['Payment_pending'] : Constant::ORDER_STATUS['Processing'],
             ]);
 
             if ($request['attachments']) {
@@ -75,7 +75,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('product.productImages', 'user')->find($id);
+        $order = Order::with('user', 'product.productImages', 'shippingDetail', 'assignOrder', 'attachments')->find($id);
         return view('employee.Panel.order.order-detail', compact('order'));
     }
 

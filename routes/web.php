@@ -22,9 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
+
+    Route::controller(\App\Http\Controllers\User\DashboardController::class)->group(function () {
+        Route::get('dashboard', 'dashboard')->name('user.dashboard');
+    });
 
     Route::controller(\App\Http\Controllers\OrderController::class)->group(function () {
         Route::get('order/in-process', 'orderInProcess')->name('orders.in-process');

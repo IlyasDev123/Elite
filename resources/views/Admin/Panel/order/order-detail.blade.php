@@ -2,13 +2,13 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="card mt-5 mb-5 w-100">
+            <div class="card mb-5 w-100">
                 <div class="card-header text-center">
                     <h1 class="mb-0">Order Detail</h1>
-                    <span class="text-muted" id="orderno">Order #{{ $order->order_number }}</span>
+                    <span class="text-muted" id="orderno">Order number# {{ $order->order_number }}</span>
                     <div class="row">
                         <div class="col-md-6">
-                            <h5>User Name</h5>
+                            <h5>Customer Name</h5>
                             <p>{{ $order->user->name }}</p>
                         </div>
                         <div class="col-md-6">
@@ -31,7 +31,7 @@
 
                         <div class="col-md-3">
                             <h5 class="title">Product Type:</h5>
-                            <p class="p-1">{{ $order->product->product_type }}</p>
+                            <p class="p-1">{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</p>
                         </div>
                         <div class="col-md-3">
                             <h5 class="title">Product Quantity:</h5>
@@ -47,7 +47,7 @@
                         <div class="row mt-2 mb-2">
                             @foreach (array_slice($data, $i, $columns, true) as $key => $value)
                                 <div class="col-md-3">
-                                    <h5 class="title">{{ $key }}:</h5>
+                                    <h5 class="title">{{ ucwords(str_replace('_', ' ', $key)) }}:</h5>
                                     <p class="p-1">{{ $value }}</p>
                                 </div>
                             @endforeach
@@ -58,41 +58,78 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <h5 class="title">Additional Instructions:</h5>
-                            <p class="p-1">{{ $order->instruction_notes }}</p>
+                            <p class="p-1">{{ $order?->description }}</p>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <h5 class="title"> Price :</h5>
-                            <p class="p-1">${{ $order->price ?? 0 }}</p>
+                            <p class="p-1">${{ $order->price ?? null }}</p>
+                        </div>
+
+                        <div class="col-md-3">
+                            <h5 class="title"> Payment Status :</h5>
+                            <p class="p-1 badge-primary">{{ $order->is_paid ? 'Paid' : 'Payment Pending' }}</p>
                         </div>
                     </div>
+                    <hr class="mt-2 mb-3" />
+                    @if ($order->assignOrder != null)
+                        <div class="row mt-3 mb-3">
+                            <h4 class="mt-2 mb-2">Assign Detail</h4>
+                            <div class="col-md-3">
+                                <h5 class="title">Assign To:</h5>
+                                <p class="p-1">{{ $order->assignOrder->user->name }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="title">Assign Date:</h5>
+                                <p class="p-1">{{ $order?->assignOrder?->created_at->format('Y-m-d') }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="title">Instruction detail:</h5>
+                                <p class="p-1">{{ $order?->assignOrder?->description }}</p>
+                            </div>
 
+                        </div>
+                    @endif
                     <div class="row mt-3">
                         <h5 class="title mb-3">Images:</h5>
                         @foreach ($order->product->productImages->chunk(4) as $chunk)
                             @foreach ($chunk as $file)
                                 <div class="col-md-3">
                                     <a href="{{ asset('storage/' . $file->image) }}" target="_blank">
-                                        <img src="{{ asset('storage/' . $file->image) }}" alt="" width="150px"
+                                        <img src="{{ asset('storage/' . $file->image) }}" alt="" width="100%"
                                             height="100px">
                                     </a>
                                 </div>
                             @endforeach
                         @endforeach
                     </div>
-                    {{-- @if ($order->status == 2)
-                        <div class="m-5 d-flex justify-center">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Accept Price
-                            </button>
+                    <hr class="mt-2 mb-3" />
+                    @if ($order->attachments->count() > 0)
+                        <div class="row mt-5">
+                            <h5 class="title mb-3">Order Submission Detail</h5>
+                            <h5 class="title mb-3">Instruction detail:</h5>
+                            <p>{{ $order->submission_note }}</p>
+                            <h5 class="title mb-3">Design Files:</h5>
+                            @foreach ($order->attachments->chunk(4) as $chunk)
+                                @foreach ($chunk as $file)
+                                    <div class="col-md-3">
+                                        <div>
+                                            <a href="{{ asset('storage/' . $file->attachment) }}" target="_blank">
+                                                <img src="{{ asset('storage/' . $file->attachment) }}" alt=""
+                                                    width="100%" height="100px">
+                                            </a>
+                                        </div>
+                                        <div class="mt-2 text-center">
+                                            <a download="Source" href="{{ Storage::url($file->attachment) }}"
+                                                title="{{ $file->attachment }}">Download</a>
+                                        </div>
 
-                            <button class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#rejectModal">
-                                Reject Price
-                            </button>
+                                    </div>
+                                @endforeach
+                            @endforeach
                         </div>
-                    @endif --}}
+                    @endif
 
                 </div>
             </div>
-        </div>
-    @endsection
+        @endsection

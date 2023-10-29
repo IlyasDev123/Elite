@@ -33,7 +33,10 @@
                                         <td>{{ $order->product->product_category }}</td>
                                         <td>{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</td>
                                         <td>{{ $order->product->product_quantity }}</td>
-                                        <td>Action</td>
+                                        <td>
+                                            <a href="{{ route('orders.show', $order->id) }}" title="View order"><i
+                                                    class="text-primary" data-feather="eye"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

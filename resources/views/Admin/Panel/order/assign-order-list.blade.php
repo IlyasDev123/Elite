@@ -18,6 +18,7 @@
                                     <th>Instruction</th>
                                     <th>Assigned To</th>
                                     <th>Assign Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,10 @@
                                         </td>
                                         <td>
                                             {{ $order?->assignOrder?->created_at->format('d-m-Y') }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.orders.show', $order->id) }}" title="View order"><i
+                                                    class="text-primary" data-feather="eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

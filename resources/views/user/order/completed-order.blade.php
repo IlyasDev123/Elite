@@ -21,6 +21,7 @@
                                     <th>Product Category</th>
                                     <th>Product Type</th>
                                     <th>Source Files</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,10 @@
                                                 @endforeach
                                             @endif
 
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary rounded mt-1"
+                                                href="{{ route('orders.show', $order->id) }}" title="View order">Detail</a>
                                         </td>
 
                                     </tr>

@@ -2,111 +2,103 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="card mt-5 mb-5 w-100">
+            <div class="custom__card mb-5 w-100">
                 <div class="card-header text-center">
                     <h1 class="mb-0">Order Detail</h1>
-                    <span class="text-muted" id="orderno">Order #{{ $order->id }}</span>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>User Name</h5>
-                            <p>{{ $order->user->name }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Email</h5>
-                            <p>{{ $order->user->email }}</p>
-                        </div>
-                    </div>
+                    <span class="text-muted" id="orderno">Order number# {{ $order->order_number }}</span>
                 </div>
 
-                <div class="card-body">
-                    <div class="row">
+                <div class="card-body m-4">
+                    <div class="row mb-3">
                         <div class="col-md-3">
-                            <h5>Order Type</h5>
-                            <p>{{ $order->order_type }}</p>
+                            <h5 class="title">Name:</h5>
+                            <p class="p-1">{{ $order->product->name }}</p>
                         </div>
                         <div class="col-md-3">
-                            <h5>Design Name</h5>
-                            <p>{{ $order->name }}</p>
+                            <h5 class="title">Product Category:</h5>
+                            <p class="p-1">{{ $order->product->product_category }}</p>
                         </div>
 
                         <div class="col-md-3">
-                            <h5>Type</h5>
-                            <p>{{ $order->type }}</p>
+                            <h5 class="title">Product Type:</h5>
+                            <p class="p-1">{{ $order->product->product_type == 1 ? 'Physical' : 'Digital' }}</p>
                         </div>
                         <div class="col-md-3">
-                            <h5>Placement</h5>
-                            <p>{{ $order->placement }}</p>
+                            <h5 class="title">Product Quantity:</h5>
+                            <p class="p-1">{{ $order?->product?->product_quantity }}</p>
                         </div>
                     </div>
+                    @php
+                        $data = json_decode($order->product->attributes, true);
+                        $columns = 4;
+                    @endphp
 
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <h5>Color Name</h5>
-                            <p>{{ $order->name_of_color }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>No of Color</h5>
-                            <p>{{ $order->no_of_color }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>Width</h5>
-                            <p>{{ $order->width }} {{ $order->unit }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>Height</h5>
-                            <p>{{ $order->height }} {{ $order->unit }}</p>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <h5>Design Format</h5>
-                            <p>{{ $order->design_format ?? $order->other_format }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>Appliques</h5>
-                            <p>{{ $order->applique }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>Time Frame</h5>
-                            <p>{{ $order->time_frame }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h5>Auto Thread Cutting </h5>
-                            <p>{{ $order->thearding_cute_size }}</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <h5>Additional Instructions</h5>
-                            <p>{{ $order->extra_instruction }}</p>
-                        </div>
-
-                        <div class="col-md-6">
-                            <h5>Attachments</h5>
-                            @foreach ($order->files as $file)
-                                <a href="{{ asset('storage/' . $file->file) }}" target="_blank">{{ $file->file }}</a>
+                    @for ($i = 0; $i < count($data); $i += $columns)
+                        <div class="row mt-2 mb-2">
+                            @foreach (array_slice($data, $i, $columns, true) as $key => $value)
+                                <div class="col-md-3">
+                                    <h5 class="title">{{ ucwords(str_replace('_', ' ', $key)) }}:</h5>
+                                    <p class="p-1">{{ $value }}</p>
+                                </div>
                             @endforeach
                         </div>
+                    @endfor
 
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h5 class="title">Detail Instruction:</h5>
+                            <p class="p-1">{{ $order->description }}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="title">Price:</h5>
+                            <p class="p-1">${{ $order->price ?? null }}</p>
+                        </div>
                     </div>
+                    <hr class="mt-2 mb-3" />
 
-                    <hr>
+                    <div class="row mt-3">
+                        <h5 class="title mb-3">Images:</h5>
+                        @foreach ($order->product->productImages->chunk(4) as $chunk)
+                            @foreach ($chunk as $file)
+                                <div class="col-md-3">
+                                    <a href="{{ asset('storage/' . $file->image) }}" target="_blank">
+                                        <img src="{{ asset('storage/' . $file->image) }}" alt="" width="100%"
+                                            height="100px">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endforeach
+                    </div>
+                    <hr class="mt-2 mb-3" />
 
-                    {{-- <div class="card-footer text-center">
-                        <div class="row">
-                            <div class="col">
-                                <h3>Total:</h3>
-                            </div>
-                            <div class="col">
-                                <h3><b>$847.95</b></h3>
-                            </div>
+                    @if ($order->attachments->count() > 0 && $order->status == 5)
+                        <div class="row mt-5">
+                            <h5 class="title mb-3">Order Submission Detail</h5>
+                            <h5 class="title mb-1">Designer Order Submit Note:</h5>
+                            <p class="mb-3">{{ $order->submission_note ?? null }}</p>
+                            <h5 class="title mb-3">Design Files:</h5>
+                            @foreach ($order->attachments->chunk(4) as $chunk)
+                                @foreach ($chunk as $file)
+                                    <div class="col-md-3">
+                                        <div>
+                                            <a href="{{ asset('storage/' . $file->attachment) }}" target="_blank">
+                                                <img src="{{ asset('storage/' . $file->attachment) }}" alt=""
+                                                    width="100%" height="100px">
+                                            </a>
+                                        </div>
+                                        <div class="mt-2 text-center">
+                                            <a download="Source" href="{{ Storage::url($file->attachment) }}"
+                                                title="{{ $file->attachment }}">Download</a>
+                                        </div>
+
+                                    </div>
+                                @endforeach
+                            @endforeach
                         </div>
-                        <div class="mt-4">
-                            <button class="btn btn-primary">Track your order</button>
-                        </div>
-                    </div> --}}
+                    @endif
+
                 </div>
             </div>
-        </div>
-    @endsection
+        @endsection

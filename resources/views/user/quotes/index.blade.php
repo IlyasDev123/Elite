@@ -2,14 +2,9 @@
 
 @section('content')
     <div class="row mb-3">
-        {{-- <div class="col-9">
-            <button class="btn btn-primary" onclick="filterOrders('new')">New Orders</button>
-            <button class="btn btn-warning" onclick="filterOrders('pending')">Pending Orders</button>
-            <button class="btn btn-success" onclick="filterOrders('complete')">Complete Orders</button>
-        </div> --}}
-        <div class="col-3 ml-auto">
+        <div class="col-6 d-flex">
             <a class="btn btn-success" href="{{ route('quotes.create') }}">Custom Patch </a>
-            <a class="btn btn-success" href="{{ route('emborided-patches') }}">Custom Clothing</a>
+            <a class="btn btn-success  ml-4" href="{{ route('emborided-patches') }}">Custom Clothing</a>
         </div>
     </div>
     <div class="container-fluid custom__card">

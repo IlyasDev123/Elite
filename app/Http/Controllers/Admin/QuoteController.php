@@ -14,8 +14,15 @@ class QuoteController extends Controller
      */
     public function index(Quote $quote)
     {
-        $quotes = $quote->whereIntegerInRaw('status', [1, 2, 3])->with('product')->latest()->get();
+        $status = request()->query('status');
+        $quotes = $quote->when($status, fn ($query) => $query->where('status', $this->getQuoteStatus($status)))->with('product')->latest()->get();
         return view('Admin.Panel.quotes.index', compact('quotes'));
+    }
+
+    protected function getQuoteStatus($status)
+    {
+        $quoteStatuses = Constant::QUOTE_STATUS;
+        return array_key_exists($status, $quoteStatuses) ? $quoteStatuses[$status] : null;
     }
 
     /**

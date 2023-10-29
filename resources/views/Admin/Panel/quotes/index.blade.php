@@ -29,7 +29,7 @@
                                         <td>{{ $quote->product->product_category }}</td>
                                         <td>Physical Product</td>
                                         <td>{{ $quote->product->product_quantity }}</td>
-                                        <th>
+                                        <td>
                                             @switch($quote->status)
                                                 @case(1)
                                                     <span class="badge bg-warning">Pending</span>
@@ -49,7 +49,7 @@
 
                                                 @default
                                             @endswitch
-                                        </th>
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.quotes.show', $quote->id) }}">
                                                 <i class="fa fa-eye"></i></a>
@@ -76,7 +76,7 @@
     </div>
 
     @isset($quotes)
-        @include('Admin.Panel.quotes.price-modal', ['quote' => $quote])
+        @include('Admin.Panel.quotes.price-modal')
     @endisset
 @endsection
 
