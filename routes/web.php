@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
+    Route::controller(App\Http\Controllers\NotificationController::class)->group(function () {
+        Route::get('notification', 'index')->name('notifications');
+    });
 
     Route::controller(\App\Http\Controllers\User\DashboardController::class)->group(function () {
         Route::get('dashboard', 'dashboard')->name('user.dashboard');
@@ -73,6 +76,10 @@ Route::prefix('admin')->group(function () {
         Route::controller(AdminAuthController::class)->group(function () {
             Route::get('logout', 'adminLogout')->name('adminLogout');
             Route::post('change-password', 'changePassword')->name('change.password');
+        });
+
+        Route::controller(App\Http\Controllers\Admin\NotificationController::class)->group(function () {
+            Route::get('admin-notification', 'index')->name('admin.notifications');
         });
 
         Route::controller(ProfileSettingsController::class)->group(function () {

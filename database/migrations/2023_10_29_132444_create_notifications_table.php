@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('content', 500);
             $table->morphs('notifiable');
             $table->boolean('is_read')->default(false);
-            $table->morphs('send_by');
+            $table->nullableMorphs('send_by');
             $table->morphs('send_to');
             $table->timestamps();
         });

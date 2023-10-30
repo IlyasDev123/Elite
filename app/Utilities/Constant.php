@@ -44,4 +44,21 @@ class Constant
         "Physical" => 1,
         "Digital" => 2,
     ];
+
+    const NOTIFICATION_TYPE = [
+        'Order_created' => 1,
+        'Assign_order' => 2,
+        'Submit_order' => 3,
+        'Payment_pending' => 4,
+        'Payment_completed' => 5,
+        'Order_completed' => 6,
+        'Order_cancelled' => 7,
+        'Quote_created' => 8,
+        'Quote_accepted' => 9,
+        'Quote_rejected' => 10,
+        'Quote_payment_pending' => 11,
+        'Quote_payment_completed' => 12,
+        'Quote_cancelled' => 13,
+        'Quote_assigned' => 14,
+    ];
 }

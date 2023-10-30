@@ -441,3 +441,19 @@ section.main__section {
 .main__menu >ul >li > a.hover{
     color: #93fa04f0;
 }
+
+.notification__list {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px 0;
+    width: 350px;
+    display: none;
+    max-height: 300px;
+    overflow: auto;
+}

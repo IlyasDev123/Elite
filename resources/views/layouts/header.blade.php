@@ -14,10 +14,13 @@
                     <span>Help</span>
                 </a>
             </li>
-            <li>
-                <a href="">
+            <li id="notificationLink">
+                <a href="#" class="position-relative">
                     <i class="fa fa-bell" aria-hidden="true"></i>
                 </a>
+                <ul class="notification__list" id="notificationList">
+                    <li>Notification</li>
+                </ul>
             </li>
             <li>
                 <a href="">
@@ -72,3 +75,41 @@
     </nav>
 
 </header>
+
+@section('scripts-js')
+    <script>
+        $(document).ready(function() {
+
+            $('#notificationLink').click(function(event) {
+                $('.notification__list').toggle();
+                if ($('.notification__list').is(':visible')) {
+                    getNotifications(); // Call the function only if the list is visible
+                }
+            });
+
+            function getNotifications() {
+                $.ajax({
+                    url: "{{ route('notifications') }}",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        console.log("response data", response);
+                        var notifications = response;
+
+                        // Clear existing notifications
+                        $('#notificationLink ul').empty();
+
+                        // Add fetched notifications to the list
+                        notifications.forEach(function(notification) {
+                            $('#notificationLink ul').append('<li class="m-2">' + notification
+                                .content + '</li><hr>');
+                        });
+                    }
+                });
+            }
+
+
+        });
+        // Get notifications every 5 seconds
+    </script>
+@endsection

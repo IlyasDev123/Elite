@@ -2,28 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Order;
 use App\Utilities\Constant;
+use App\Jobs\CustomEmailJob;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use Illuminate\Support\Facades\DB;
+use App\Services\NotificationService;
 use App\Http\Requests\Order\CreateOrderRequest;
 
 class OrderController extends Controller
 {
-    protected $productService;
+    protected $productService, $notificationService;
+
     /**
      * Create a new controller instance.
      */
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, NotificationService $notificationService)
     {
         $this->productService = $productService;
+        $this->notificationService = $notificationService;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Order::with('product')->where('status', Constant::ORDER_STATUS['Pending'])->where('user_id', auth()->id())->get();
+        $orders = Order::with('product')->where('status', Constant::ORDER_STATUS['Pending'])->where('user_id', auth()->id())->latest()->get();
         return view('user.order.new', compact('orders'));
     }
 
@@ -32,7 +38,7 @@ class OrderController extends Controller
      */
     public function orderInProcess()
     {
-        $orders = Order::with('product')->whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Assigned']])->where('user_id', auth()->id())->get();
+        $orders = Order::with('product')->whereIn('status', [Constant::ORDER_STATUS['Processing'], Constant::ORDER_STATUS['Assigned']])->where('user_id', auth()->id())->latest()->get();
         return view('user.order.in-process', compact('orders'));
     }
 
@@ -42,7 +48,7 @@ class OrderController extends Controller
     public function paymentPending()
     {
         $intent = auth()->user()->createSetupIntent();
-        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('product')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Payment_pending'])->where('user_id', auth()->id())->with('product')->latest()->get();
 
         return view('user.order.payment-pending-list', compact('orders', 'intent'));
     }
@@ -50,7 +56,7 @@ class OrderController extends Controller
 
     public function InShippingOrders()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Shipping_process'])->where('user_id', auth()->id())->with('attachments', 'product')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Shipping_process'])->where('user_id', auth()->id())->with('attachments', 'product')->latest()->get();
 
         return view('user.order.shipping-process', compact('orders'));
     }
@@ -59,7 +65,7 @@ class OrderController extends Controller
      */
     public function completedOrders()
     {
-        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->where('user_id', auth()->id())->with('attachments', 'product')->get();
+        $orders = Order::where('status', Constant::ORDER_STATUS['Completed'])->where('user_id', auth()->id())->with('attachments', 'product')->latest()->get();
 
         return view('user.order.completed-order', compact('orders'));
     }
@@ -77,6 +83,8 @@ class OrderController extends Controller
     public function store(CreateOrderRequest $request)
     {
         try {
+            DB::beginTransaction();
+
             $request['user_id'] = auth()->id();
             $product = $this->productService->storeProduct($request);
             $order = Order::create([
@@ -87,8 +95,20 @@ class OrderController extends Controller
                 "status" => Constant::ORDER_STATUS['Pending'],
             ]);
 
-            return redirect()->route('orders.index')->with('success', 'Order created successfully');
+            $admin = Admin::select('id', 'email')->where('type', Constant::ROLE['Admin'])->first();
+            $this->notificationService->sendNotification(1, $order->id, Order::class, 'New Order Created', $admin->id, Admin::class,  auth()->id(), User::class);
+
+            DB::commit();
+
+            $data = [
+                "subject" => "New Order Created",
+                "email" => $admin->email,
+                "view" => "emails.order-created",
+                "content" => auth()->user()->name . " has sent you a new order request.",
+            ];
+            CustomEmailJob::dispatch($data);
         } catch (\Throwable $th) {
+            DB::rollBack();
             return redirect()->back()->with('error', $th->getMessage());
         }
     }

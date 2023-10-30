@@ -13,54 +13,15 @@
                  <i data-feather="arrow-left" class="fe-1x align-middle"></i>
              </a>
          </li>
-         {{-- <li class="nav-item d-flex flex-column me-lg-2 h-100 justify-content-center dropdown">
-             <a href="javascript:void(0)" data-bs-toggle="dropdown"
-                 class="d-flex align-items-center justify-content-center nav-link size-35 p-0"
-                 data-bs-auto-close="outside" aria-expanded="false">
-                 <i data-feather="search" class="fe-1x align-middle"></i>
-             </a>
 
-             <!--Search dropdown menu-->
-             <div class="dropdown-menu p-0 dropdown-menu-sm overflow-hidden mt-0">
-
-                 <!--Search form-->
-                 <form>
-                     <div class="d-flex align-items-center p-1 border-bottom ps-4">
-                         <div class="text-muted">
-                             <i data-feather="search" class="fe-1x align-middle"></i>
-                         </div>
-                         <input type="text" autofocus class="form-control rounded-0 py-3 ps-2 border-0 shadow-none"
-                             placeholder="Search everything...">
-                     </div>
-                 </form>
-             </div>
-         </li> --}}
-         {{-- <li class="nav-item d-flex flex-column h-100 justify-content-center dropdown">
-             <a href="#" data-bs-toggle="dropdown"
-                 class=" dropdown-toggle nav-link py-1 px-2 d-flex align-items-center justify-content-center p-0">
-                 Eng
-             </a>
-             <div class="dropdown-menu overflow-hidden mt-0">
-                 <a href="#!" class="dropdown-item active">
-                     English
-                 </a>
-                 <a href="#!" class="dropdown-item">
-                     Spanish
-                 </a>
-                 <a href="#!" class="dropdown-item">
-                     French
-                 </a>
-             </div>
-         </li> --}}
      </ul>
      <ul class="navbar-nav ms-auto d-flex align-items-center h-100">
          <li class="nav-item dropdown d-flex align-items-center justify-content-center flex-column h-100 me-2 me-lg-4">
              <a href="#"
                  class="nav-link p-0 position-relative size-35 d-flex align-items-center justify-content-center rounded-2"
                  aria-expanded="false" data-bs-toggle="dropdown" data-bs-auto-close="outside">
-                 <i data-feather="bell" class="fe-2x align-middle"></i>
+                 <i id="notificationBell" data-feather="bell" class="fe-2x align-middle"></i>
              </a>
-
 
              <div class="dropdown-menu mt-0 p-0 overflow-hidden dropdown-menu-end dropdown-menu-sm">
                  <div class="d-flex p-3 justify-content-between align-items-center border-bottom">
@@ -68,79 +29,10 @@
                      <div class="flex-shrink-0">
                      </div>
                  </div>
-                 <div data-simplebar style="max-height:300px;">
+
+                 <div id="notificationList" data-simplebar style="max-height: 300px;">
                      <ul class="list-unstyled mb-0">
-                         {{-- <li class="px-3 pt-3 h6">New</li> --}}
-                         <!--//Notification item start//-->
-                         <li class="d-block">
-                             {{-- <div class="d-block me-3">
-                                 <div class="avatar avatar-status status-online">
-                                     <img src="{{ asset('admin/assets/media/avatars/01.jpg') }}"
-                                     class="img-fluid rounded-circle w-auto" alt="">
-                                    </div>
-                                </div> --}}
-
-                             <div class="flex-grow-1 flex-wrap">
-                             </div>
-                         </li>
-                         <!--//Notification item start//-->
-                         {{-- <li class="d-block">
-                             <a href="#" class="hover-bg-gray px-3 py-2 text-reset d-flex align-items-center">
-                                 <div class="d-block me-3">
-                                     <div class="avatar avatar-status status-offline">
-                                         <img src="{{ asset('admin/assets/media/avatars/06.jpg') }}"
-                                             class="img-fluid rounded-circle w-auto" alt="">
-                                     </div>
-                                 </div>
-
-                                 <div class="flex-grow-1 flex-wrap pe-3">
-                                     <span class="mb-0 d-block"><strong>Vivianna Kiser
-                                         </strong> just posted <span>"Lorem ipsum is placeholder text
-                                             used in the graphic, print,
-                                             and industries.
-                                             "</span></span>
-                                     <small class="text-muted">2h Ago</small>
-                                 </div>
-                             </a>
-                         </li> --}}
-
-                         {{-- <li class="px-3 pt-3 h6">Earlier</li> --}}
-                         <!--//Notification item start//-->
-                         {{-- <li class="d-block">
-                             <a href="#" class="hover-bg-gray px-3 py-2 text-reset d-flex align-items-center">
-                                 <span class="d-block me-3">
-                                     <span
-                                         class="d-flex align-items-center justify-content-center lh-1 size-50 bg-tint-success text-success rounded-circle">
-                                         <i data-feather="tool" class="fe-2x align-middle"></i>
-                                     </span>
-                                 </span>
-
-                                 <div class="flex-grow-1 flex-wrap pe-3">
-                                     <span class="mb-0 d-block"><strong>Updated</strong> Your account
-                                         password updated
-                                         succuessfully</span>
-                                     <small class="text-muted">2h Ago</small>
-                                 </div>
-                             </a>
-                         </li> --}}
-                         <!--//Notification item start//-->
-                         {{-- <li class="d-block">
-                             <a href="#" class="hover-bg-gray px-3 py-2 text-reset d-flex align-items-center">
-                                 <span class="d-block me-3">
-                                     <span
-                                         class="d-flex align-items-center justify-content-center lh-1 size-50 bg-tint-danger text-danger rounded-circle">
-                                         <i data-feather="percent" class="fe-2x align-middle"></i>
-                                     </span>
-                                 </span>
-
-                                 <div class="flex-grow-1 flex-wrap pe-3">
-                                     <span class="mb-0 d-block"><strong>Pro discount</strong> Upgrade
-                                         to pro plan with 30%
-                                         discount, Apply coupon <span class="badge bg-primary">PRO30</span></span>
-                                     <small class="text-muted">2h Ago</small>
-                                 </div>
-                             </a>
-                         </li> --}}
+                         <!-- Notifications will be added here -->
                      </ul>
                  </div>
              </div>
@@ -189,4 +81,34 @@
          </li>
      </ul>
  </header>
- <!--Main Header End-->
+ @section('js-script')
+     <script>
+         // Get notifications
+         function getNotifications() {
+             $.ajax({
+                 url: "{{ route('admin.notifications') }}",
+                 type: "GET",
+                 dataType: "json",
+                 success: function(response) {
+                     console.log("response", response);
+                     var notifications = response;
+
+                     // Clear existing notifications
+                     $('#notificationList ul').empty();
+
+                     // Add fetched notifications to the list
+                     notifications.forEach(function(notification) {
+                         $('#notificationList ul').append('<li class="m-4">' + notification
+                             .content + '</li><hr>');
+                     });
+                 }
+             });
+         }
+
+         // Get notifications on page load
+         $('#notificationBell').click(function() {
+             getNotifications();
+         });
+         // Get notifications every 5 seconds
+     </script>
+ @endsection

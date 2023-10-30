@@ -7,9 +7,11 @@ use App\Models\Quote;
 use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 
 class DashboardController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

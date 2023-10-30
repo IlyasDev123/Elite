@@ -12,7 +12,7 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <input type="hidden" name="order_id" value="{{ $order->id }}" />
+                        <input type="hidden" name="order_id" value="" id="order_id" />
                         <div class="mb-3">
                             <label for="price" class="form-label">Price *</label>
                             <input type="number" class="form-control" placeholder="price" aria-label="price"
@@ -29,3 +29,12 @@
         </div>
     </div>
 </div>
+
+@section('js-script')
+    <script>
+        $(".submit-order").click(function() {
+            var ids = $(this).attr('data-id');
+            $("#order_id").val(ids);
+        })
+    </script>
+@endsection

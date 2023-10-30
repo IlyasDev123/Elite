@@ -54,7 +54,8 @@
                                             @if ($order->status == App\Utilities\Constant::ORDER_STATUS['Payment_pending'])
                                                 <span class="badge bg-primary">Payment Pending</span>
                                             @elseif($order->status == App\Utilities\Constant::ORDER_STATUS['Processing'] && $order->price == null)
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                <a href="#" class="btn btn-primary submit-order"
+                                                    data-id="{{ $order->id }}" data-bs-toggle="modal"
                                                     data-bs-target="#detailOrder" title="Detail Order">Submit Price</a>
                                             @elseif($order->status == App\Utilities\Constant::ORDER_STATUS['Completed'])
                                                 <span class="badge bg-success">Completed</span>
