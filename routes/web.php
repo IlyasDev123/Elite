@@ -85,7 +85,7 @@ Route::prefix('admin')->group(function () {
         Route::controller(ProfileSettingsController::class)->group(function () {
             Route::get('settings', 'showSettings')->name('showSettings');
             Route::get('security', 'showSecurity')->name('showSecurity');
-            Route::post('admin-update-profile', 'adminProfileUpdate')->name('profile.update');
+            Route::post('admin-update-profile', 'adminProfileUpdate')->name('admin.profile.update');
         });
 
         Route::controller(DashboardController::class)->group(function () {
@@ -128,7 +128,7 @@ Route::prefix('employee')->group(function () {
         Route::controller(ProfileSettingsController::class)->group(function () {
             Route::get('settings', 'showSettings')->name('showSettings');
             Route::get('security', 'showSecurity')->name('showSecurity');
-            Route::post('admin-update-profile', 'adminProfileUpdate')->name('profile.update');
+            Route::post('admin-update-profile', 'adminProfileUpdate')->name('employee.profile.update');
         });
 
         Route::controller(DashboardController::class)->group(function () {

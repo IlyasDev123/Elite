@@ -1,0 +1,128 @@
+@media(min-width:1920px){
+
+}
+
+@media only screen and (max-width:1200px) {
+}
+
+@media only screen and (max-width:999px) {
+
+}
+
+@media only screen and (max-width:768px) {
+
+}
+
+@media only screen and (max-width:600px) {
+
+}
+
+@media(max-width:1280px){
+
+}
+@media(max-width:1024px){
+
+}
+@media(max-width:991px){
+
+}
+@media(max-width:767px){
+    .side__bar {
+        display: none;
+    }
+    .main__body {
+        width: 100%;
+    }
+
+    section.main__section {
+        padding: 20px;
+    }
+    .sidebar__btns--mobile {
+        display: block;
+    }
+
+    .sidebar__btns--mobile .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .sidebar__btns--mobile .btn:last-child {
+        margin-bottom: 0;
+    }
+
+    .sidebar__btns--mobile .btn--primary {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .sidebar__btns--mobile .btn--primary:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:active {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:focus {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:disabled {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:not(:disabled):not(.disabled):active {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:not(:disabled):not(.disabled):active:focus {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:not(:disabled):not(.disabled):active:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:not(:disabled):not(.disabled):focus {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .sidebar__btns--mobile .btn--primary:not(:disabled):not(.disabled):hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .main__menu {
+        display: flex;
+        direction: column;
+    }
+
+    .search__form{
+        display: none;
+    }
+
+    .mobile__menu__toggle{
+        display: block;
+    }
+
+    .diskstop__screen{
+        display: none;
+    }
+
+.mobile__screen{
+    display: block;
+}
+
+.main__menu{
+    display: none;
+}
+
+}

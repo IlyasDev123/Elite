@@ -457,3 +457,11 @@ section.main__section {
     max-height: 300px;
     overflow: auto;
 }
+
+.mobile__menu__toggle{
+    display: none;
+}
+
+.mobile__screen{
+    display: none;
+}

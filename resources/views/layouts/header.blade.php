@@ -7,7 +7,13 @@
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </div>
-        <ul class="main__icon">
+        <div class="mobile__menu__toggle">
+            <a href="#" id="sidebar-toggle">
+                <!-- Your toggle icon, for example, three horizontal lines -->
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+        </div>
+        <ul class="main__icon diskstop__screen">
             <li>
                 <a href="">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -23,7 +29,7 @@
                 </ul>
             </li>
             <li>
-                <a href="">
+                <a href="{{ route('profile.edit') }}">
                     <i class="fa fa-cog" aria-hidden="true"></i>
                 </a>
             </li>
@@ -32,8 +38,26 @@
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                 </a>
                 <ul class="dropdown__menu">
-                    <li><a href="#"> Profile</a></li>
-                    <li><a href="#">Settign</a></li>
+                    <li><a href="{{ route('profile.edit') }}"> Profile</a></li>
+                    <li><a href="{{ route('profile.edit') }}">Settign</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="main__icon mobile__screen">
+            <li class="dropdown setting" id="dropdown__setting">
+                <a href="#" id="dropdown-toggle">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown__menu">
+                    <li><a href="{{ route('profile.edit') }}"> Profile</a></li>
+                    <li><a href="{{ route('profile.edit') }}">Settign</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -80,6 +104,14 @@
     <script>
         $(document).ready(function() {
 
+            $('#dropdown__setting').click(function(e) {
+                e.preventDefault();
+                $('.dropdown__menu').css('display', function(_, value) {
+                    console.log(value);
+                    return value === 'none' ? 'block' : 'none';
+                });;
+            });
+
             $('#notificationLink').click(function(event) {
                 $('.notification__list').toggle();
                 if ($('.notification__list').is(':visible')) {
@@ -108,8 +140,15 @@
                 });
             }
 
+            // Toggle sidebar
+            $('#sidebar-toggle').click(function(e) {
+                e.preventDefault();
+                $('#sidebar').toggleClass('show-sidebar');
+            });
+
 
         });
+
         // Get notifications every 5 seconds
     </script>
 @endsection
