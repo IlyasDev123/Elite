@@ -27,10 +27,9 @@
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row justify-content-between align-items-center">
-                                <div class="col">
+                                {{-- <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <!-- Avatar -->
                                             <div class="position-relative">
                                                 <div class="avatar size-140">
                                                     @if (auth()->guard('admin')->user()->profile_pic)
@@ -55,8 +54,8 @@
                                                     <label data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                         title="Update Avatar"
                                                         class="btn p-0 size-40 rounded-circle d-flex align-items-center justify-content-center btn-primary">
-                                                        <input type="file" name="profile_pic" accept="image/*" id="edit-self-profile-image"
-                                                            style="display: none" />
+                                                        <input type="file" name="profile_pic" accept="image/*"
+                                                            id="edit-self-profile-image" style="display: none" />
                                                         <i data-feather="camera" class="fe-2x"></i>
                                                     </label>
                                                 </div>
@@ -67,8 +66,8 @@
                                                 Profile Picture
                                             </h5>
                                         </div>
-                                    </div> <!-- / .row -->
-                                </div>
+                                    </div>
+                                </div> --}}
                             </div>
                             <hr class="my-4">
                             <div class="row">
@@ -77,15 +76,15 @@
                                     <div class="form-group">
                                         <!-- Label -->
                                         <label class="form-label required" for="user_fname">
-                                            First name
+                                            name
                                         </label>
                                         <!-- Input -->
                                         <input type="text" name="first_name"
-                                            value="{{ auth()->guard('admin')->user()->first_name }}" class="form-control"
+                                            value="{{ auth()->guard('admin')->user()->name }}" class="form-control"
                                             id="user_fname">
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                {{-- <div class="col-12 col-md-6 mb-3">
                                     <!-- First name -->
                                     <div class="form-group">
                                         <!-- Label -->
@@ -97,7 +96,7 @@
                                             value="{{ auth()->guard('admin')->user()->last_name }}" class="form-control"
                                             id="user_lname">
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-3">
@@ -109,7 +108,7 @@
                                     <input class="form-control" name="email"
                                         value="{{ auth()->guard('admin')->user()->email }}" id="user_email" type="email">
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                {{-- <div class="col-12 col-md-6 mb-3">
                                     <!-- Label -->
                                     <label class="form-label" for="user_email">
                                         Phone Number
@@ -117,8 +116,8 @@
                                     <!-- Input -->
                                     <input class="form-control" value="{{ auth()->guard('admin')->user()->phone_number }}"
                                         id="user_number" type="text" disabled>
-                                </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                </div> --}}
+                                {{-- <div class="col-12 col-md-6 mb-3">
                                     <!-- Label -->
                                     <label class="form-label" for="user_email">
                                         Address
@@ -127,7 +126,7 @@
                                     <input class="form-control" name="address"
                                         value="{{ auth()->guard('admin')->user()->address }}" id="user_number"
                                         type="text">
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary">Save Changes</button>

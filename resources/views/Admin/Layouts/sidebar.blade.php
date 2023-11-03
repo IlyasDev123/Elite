@@ -21,10 +21,6 @@
             <nav class="flex-grow-1 h-100" id="page-navbar">
                 <!--:Sidebar nav-->
                 <ul class="nav flex-column collapse-group collapse d-flex pt-4">
-                    {{-- <li class="nav-item sidebar-title text-truncate opacity-25 small">
-                        <i class="bi bi-three-dots align-middle"></i>
-                        <span>Main</span>
-                    </li> --}}
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}"
                             class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
@@ -36,6 +32,15 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('admin.employees') }}"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'admin.employees' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i data-feather="user" class="fe-2x"></i>
+                            </span>
+                            <span class="sidebar-text">Employees</span>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="{{ route('admin.orders') }}"
@@ -54,6 +59,27 @@
                                 <i data-feather="file-plus" class="fe-2x"></i>
                             </span>
                             <span class="sidebar-text">Quotes</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.payments') }}"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'admin.payments' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i data-feather="dollar-sign" class="fe-2x"></i>
+                            </span>
+                            <span class="sidebar-text">Income</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}"
+                            class="nav-link d-flex align-items-center text-truncate {{ Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
+                            <span class="sidebar-icon">
+                                <i data-feather="user" class="fe-2x"></i>
+                            </span>
+                            <span class="sidebar-text">Customers</span>
                         </a>
                     </li>
                     {{--

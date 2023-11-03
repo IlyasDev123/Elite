@@ -1,4 +1,4 @@
-<div class="mt-3 mb-3 ml-0">
+<div class="mt-3 mb-3 gap-3">
     <a class="btn btn-outline-primary text-black {{ Route::currentRouteName() == 'orders.index' ? 'active' : '' }}"
         href="{{ route('orders.index') }}">New Orders</a>
     <a class="btn btn-outline-warning text-black {{ Route::currentRouteName() == 'orders.in-process' ? 'active' : '' }}"

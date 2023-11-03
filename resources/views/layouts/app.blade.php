@@ -18,11 +18,18 @@
     <div class="main__wrapper">
 
         <aside class="side__bar">
-            <div class="site__logo">
-                <img src="{{ asset('images/logo.png') }}" alt="logo">
-            </div>
+            <div class="d-flex justify-content-end">
+                <div class="site__logo">
+                    <img src="{{ asset('images/logo.png') }}" alt="logo">
+                </div>
 
-            @include('layouts.sidebar')
+                <a href="#" id="close-btn" class="close">
+                    <i class="fa fa-close " aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="side-bar-layout">
+                @include('layouts.sidebar')
+            </div>
 
         </aside>
 
@@ -40,6 +47,7 @@
 
     </div>
     @include('layouts.script')
+
 </body>
 
 </html>

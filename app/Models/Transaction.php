@@ -17,4 +17,14 @@ class Transaction extends Model
         'amount',
         'invoice_url',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }

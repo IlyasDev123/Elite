@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileSettingsController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +75,16 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::group(['middleware' => ['admin']], function () {
+
+        Route::controller(PaymentController::class)->group(function () {
+            Route::get('payments', 'index')->name('admin.payments');
+        });
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('employees', 'getEmployees')->name('admin.employees');
+        });
+        Route::resource('users', UserController::class);
+
         Route::controller(AdminAuthController::class)->group(function () {
             Route::get('logout', 'adminLogout')->name('adminLogout');
             Route::post('change-password', 'changePassword')->name('change.password');

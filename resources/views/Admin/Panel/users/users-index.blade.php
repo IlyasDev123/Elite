@@ -22,16 +22,12 @@
                                 @foreach ($users as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->first_name }} {{ $data->last_name }}</td>
+                                        <td>{{ $data->name }} </td>
                                         <td>{{ $data->email }}</td>
                                         <td>
-                                            @if ($data->checkTaskStatus->isEmpty())
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteUser"
-                                                    onclick="deleteUser({{ $data->id }})" title="Delete Business"><i
-                                                        class="text-danger ms-2" data-feather="trash-2"></i></a>
-                                            @else
-                                                <p class="text-danger">Task is in Progress</p>
-                                            @endif
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteUser"
+                                                onclick="deleteUser({{ $data->id }})" title="Delete Business"><i
+                                                    class="text-danger ms-2" data-feather="trash-2"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -42,12 +38,16 @@
             </div>
         </div>
     </div>
-    @include('Admin.Panel.Users.delete-user-modal')
 @endsection
 
 
 @section('js-script')
     <script>
+        $("#datatable").DataTable({
+            "filter": true,
+            "length": false
+        });
+
         function deleteUser(id) {
             $('#delete-id').val(id)
         }

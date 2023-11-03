@@ -77,12 +77,18 @@
 
     $(document).ready(function() {
         $('#dropdown-toggle').click(function(event) {
-            event.stopPropagation(); // Prevents the click event from propagating to the document
+            event.stopPropagation();
             $('.dropdown__menu').toggle();
         });
 
         $(document).click(function() {
             $('.dropdown__menu').hide();
+        });
+
+        // Toggle sidebar
+        $('#close-btn').click(function() {
+            $('.main__body').show();
+            $('.side__bar').hide();
         });
     });
 </script>

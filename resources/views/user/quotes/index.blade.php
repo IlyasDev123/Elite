@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row mb-3">
-        <div class="col-6 d-flex">
+        <div class="col-lg-6 col-md-6 col-sm-12 d-flex">
             <a class="btn btn-success" href="{{ route('quotes.create') }}">Custom Patch </a>
             <a class="btn btn-success  ml-4" href="{{ route('emborided-patches') }}">Custom Clothing</a>
         </div>

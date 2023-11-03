@@ -7,6 +7,7 @@ use App\Models\Quote;
 use App\Utilities\Constant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use App\Services\NotificationService;
 
 class DashboardController extends Controller
@@ -19,7 +20,10 @@ class DashboardController extends Controller
     {
         $orderState =  $this->dashboardState();
         $quotes =  $this->dashboardQuoteState();
-        return view('Admin.Panel.dashboard', compact('orderState', 'quotes'));
+        $totalIncomes = $this->getTotalIncomes()->sum('amount');
+        $monthlyWise = $this->getTotalIncomes()->groupBy(fn ($t) => $t->created_at->format('Y-m'));
+
+        return view('Admin.Panel.dashboard', compact('orderState', 'quotes', 'totalIncomes', 'monthlyWise'));
     }
 
     public function employeeDashboard()
@@ -70,6 +74,11 @@ class DashboardController extends Controller
 
     public function quoteStatistics()
     {
-        return Quote::get();
+        return Quote::select('id', 'status')->get();
+    }
+
+    public function getTotalIncomes()
+    {
+        return Transaction::get();
     }
 }

@@ -141,9 +141,9 @@
             }
 
             // Toggle sidebar
-            $('#sidebar-toggle').click(function(e) {
-                e.preventDefault();
-                $('#sidebar').toggleClass('show-sidebar');
+            $('#sidebar-toggle').click(function() {
+                $('.side__bar').show();
+                $('.main__body').hide();
             });
 
 

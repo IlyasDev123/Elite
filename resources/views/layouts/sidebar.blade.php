@@ -36,16 +36,18 @@
         </ul> --}}
     </li>
 
-    {{-- <li class="has__drowdown">
-        <a href="">
-            <span class="large-text">Custom Patch</span>
+    <li class="has__drowdown mobile-menu">
+        <a href="{{ route('orders.index') }}" class="{{ Route::currentRouteName() == 'orders.index' ? 'active' : '' }}">
+            <span class="large-text">All Orders</span>
         </a>
-        <ul class="sub__menu">
-            <li><a href="">Item 1</a></li>
-            <li><a href="">Item 2</a></li>
-            <li><a href="">Item 3</a></li>
-        </ul>
-    </li> --}}
+    </li>
+
+    <li class="has__drowdown mobile-menu">
+        <a href="{{ route('quotes.index') }}"
+            class="{{ Route::currentRouteName() == 'quotes.index' ? 'active' : '' }}">
+            <span class="large-text">All Quotes</span>
+        </a>
+    </li>
 
 
 </ul>

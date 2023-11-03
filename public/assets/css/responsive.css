@@ -125,4 +125,24 @@
     display: none;
 }
 
+.sidebar__btns .close{
+    display: block;
+}
+
+.side__bar {
+    width: 100%;
+}
+
+.close .fa-close{
+    font-size: 30px;
+    color: #0b3dbc;
+    margin: 10px;
+}
+
+.create-order{
+    padding: 0px;
+}
+#close-btn {
+    display: block;
+}
 }
