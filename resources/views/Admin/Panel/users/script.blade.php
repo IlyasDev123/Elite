@@ -26,6 +26,7 @@
                 success: function(response) {
                     toastr.success(response.message);
                     $('#registrationModal').modal('hide');
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     if (xhr.status ===
@@ -36,6 +37,7 @@
                             var inputField = $('#' + field);
                             inputField.after('<span class="text-danger">' +
                                 messages[0] + '</span>');
+
                         });
                     } else {
                         toastr.error(xhr.statusText);
@@ -49,8 +51,6 @@
             "length": false
         });
 
-        function deleteUser(id) {
-            $('#delete-id').val(id)
-        }
+
     });
 </script>

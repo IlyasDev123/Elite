@@ -107,6 +107,7 @@ class OrderController extends Controller
                 "content" => auth()->user()->name . " has sent you a new order request.",
             ];
             CustomEmailJob::dispatch($data);
+            return redirect()->route('orders.index')->back()->with('success', 'Order created successfully.');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', $th->getMessage());

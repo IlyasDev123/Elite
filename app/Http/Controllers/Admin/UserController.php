@@ -68,7 +68,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $user = Admin::find($id);
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            return successResponse('Employee updated successfully', $user, 201);
+        } catch (\Throwable $th) {
+            return errorResponse('Something went wrong!', $th->getMessage());
+        }
     }
 
     /**
@@ -76,13 +86,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Admin::find($id)->delete();
+        return successResponse('Employee deleted successfully');
     }
 
     public function getEmployees()
     {
         $users = Admin::whereNot('type', Constant::ROLE['Admin'])->get();
 
-        return successResponse('Employees fetched successfully', $users);
+        return view('Admin.Panel.users.employees', compact('users'));
     }
 }

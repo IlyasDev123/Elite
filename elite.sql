@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
 --
 -- Host: localhost    Database: service_web
 -- ------------------------------------------------------
--- Server version	8.0.34-0ubuntu0.22.04.1
+-- Server version	8.0.35-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -41,7 +41,7 @@ CREATE TABLE `admins` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admins_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'Admin','admin@yopmail.com','$2y$10$Q4Hl4Omih07Bb7QBZAf9XeGSB1.R2ZwG5S.eFpvbV2PtHes2tvZsq',2,1,'2023-10-26 15:10:54','2023-10-26 15:10:54'),(2,'designer','designer@yopmail.com','$2y$10$Yxf7P98iU.lKYg0J5TdIdeNYwAW2lgrygomI12aH.P0grcrUh/kDu',1,1,'2023-10-26 15:11:09','2023-10-26 15:11:09'),(3,'Production Manager','production@yopmail.com','$2y$10$.u36lgbUbtHyGdLL5mI0R.O3fiZmfv5THzvrpNAOQ5RpBY3iJCGUe',3,1,'2023-10-26 15:11:09','2023-10-26 15:11:09');
+INSERT INTO `admins` VALUES (1,'Admin','admin@yopmail.com','$2y$10$Q4Hl4Omih07Bb7QBZAf9XeGSB1.R2ZwG5S.eFpvbV2PtHes2tvZsq',2,1,'2023-10-26 15:10:54','2023-10-26 15:10:54'),(2,'designer','designer@yopmail.com','$2y$10$Yxf7P98iU.lKYg0J5TdIdeNYwAW2lgrygomI12aH.P0grcrUh/kDu',1,1,'2023-10-26 15:11:09','2023-10-26 15:11:09'),(3,'Production Manager','production@yopmail.com','$2y$10$.u36lgbUbtHyGdLL5mI0R.O3fiZmfv5THzvrpNAOQ5RpBY3iJCGUe',3,1,'2023-10-26 15:11:09','2023-10-26 15:11:09'),(4,'This is design','h@yopmail.com','$2y$10$3EP1HjZNDhtbQ1PUk5tZZu5Ms3scdxZqHCf/n/KgCa139d55scbMa',1,1,'2023-11-02 14:08:08','2023-11-02 14:08:08');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -714,7 +714,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Remedios Strickland','xexuki@mailinator.com',NULL,'$2y$10$wmFJ4u93LvL/D8PzQHurHur4zsZFINScbM4Pmt5NF78ZhPcP853Gi',NULL,'2023-10-26 15:13:24','2023-10-26 15:17:16','cus_OtMfjrzQ21ViRQ','visa','4242',NULL);
+INSERT INTO `users` VALUES (1,'Remedios Strickland','text@yopmail.com',NULL,'$2y$10$wmFJ4u93LvL/D8PzQHurHur4zsZFINScbM4Pmt5NF78ZhPcP853Gi','Bzv3FxIeSbhlg2cJZOvf5DIqsUlPs7T3En79ti4tUrxoFvnu2ebZZI0DEC37','2023-10-26 15:13:24','2023-10-31 12:12:38','cus_OtMfjrzQ21ViRQ','visa','4242',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -727,4 +727,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-31 10:29:50
+-- Dump completed on 2023-11-04 18:40:06

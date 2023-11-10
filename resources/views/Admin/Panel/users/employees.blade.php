@@ -37,9 +37,10 @@
                                         @endphp
                                         <td>{{ $userType }}</td>
                                         <td>
+
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteUser"
-                                                onclick="deleteUser({{ $data->id }})" title="Delete Business"><i
-                                                    class="text-danger ms-2" data-feather="trash-2"></i></a>
+                                                data-id="{{ $data->id }}" title="Delete Business"><i
+                                                    class="text-danger ms-2 delete-user" data-feather="trash-2"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -51,6 +52,7 @@
         </div>
     </div>
     @include('Admin.Panel.users.user-form')
+    @include('Admin.Panel.users.delete-user-modal')
 @endsection
 
 
